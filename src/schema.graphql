@@ -1,0 +1,88 @@
+type Images {
+  id: Int!
+  image: String!
+  usersid : Int!
+}
+
+type Library {
+  id: Int!
+  name: String!
+  usersid: Int!
+}
+
+type Flowers {
+  id: Int!
+  image: String!
+  name: String!
+  type: String!
+  color: String!
+  content: String!
+  weather: String!
+}
+
+type Users {
+  id: Int!
+  email: String!
+  password: String!
+  images : [Images]
+  library : [Library]
+}
+
+type GetImageResponse {
+  result: Boolean!
+  error: String
+  image: [Images]
+}
+
+type GetLibraryResponse {
+  result: Boolean!
+  error: String
+  library: [Library]
+}
+
+type GetFlowerResponse {
+  result: Boolean!
+  error: String
+  flower: [Flowers]
+}
+
+type Query {
+  GetImage: GetImageResponse
+  GetLibrary: GetLibraryResponse
+  GetFlower: GetFlowerResponse
+}
+
+type Mutation {
+  EmailLogin(email: String! , password : String!): EmailLoginResponse
+  EmailRegist(email : String! , password : String!): EmailRegistResonse
+  CreateImage(image : String! , userid : Int!, flowerid : [Int]): CreateImageResponse
+  DeleteImage(id : Int! , userid : Int!): DeleteImageResponse
+  CreateLibrary(name : String! , userid : Int!): CreateLibraryResponse
+}
+
+type EmailLoginResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type EmailRegistResonse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type CreateImageResponse {
+  result: Boolean!
+  error: String
+}
+
+type DeleteImageResponse {
+  result: Boolean!
+  error: String
+}
+
+type CreateLibraryResponse {
+  result: Boolean!
+  error: String
+}
