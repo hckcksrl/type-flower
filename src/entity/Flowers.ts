@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToOne
+} from "typeorm";
+import { Images } from "./Image";
+import { Flower_Image } from "./Flower_Image";
 
 @Entity({ name: "flowers" })
 export class Flowers extends BaseEntity {
@@ -22,4 +30,11 @@ export class Flowers extends BaseEntity {
 
   @Column({ type: "varchar", nullable: false })
   weather: string;
+
+  @ManyToOne(type => Flower_Image, flower_image => flower_image.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
+  flower_image: Flower_Image[];
 }
