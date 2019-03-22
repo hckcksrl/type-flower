@@ -1,0 +1,9 @@
+type Flowers {
+  id: Int!
+  image: String!
+  name: String!
+  type: String!
+  color: String!
+  content: String!
+  weather: String!
+}
