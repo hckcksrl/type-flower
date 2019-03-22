@@ -7,5 +7,4 @@ Steps to run this project:
 3. Run `npm start` command
 
 
-
-graphql.schema 
+typescript
