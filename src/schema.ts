@@ -1,21 +1,16 @@
-import { GraphQLSchema } from "graphql";
-import {
-  makeExecutableSchema,
-  IResolvers,
-  ITypeDefinitions
-} from "graphql-tools";
+import { makeExecutableSchema, IResolvers } from "graphql-tools";
 import { fileLoader, mergeResolvers, mergeTypes } from "merge-graphql-schemas";
 import * as path from "path";
 
 const allTypes: string[] = fileLoader(
-  path.join(__dirname, "./API/**/**/*.graphql")
+  path.join(__dirname, "./route/**/**/*.graphql")
 );
 
 const allResolvers: IResolvers[] = fileLoader(
-  path.join(__dirname, "./API/**/**/resolvers.*")
+  path.join(__dirname, "./route/**/**/resolvers.*")
 );
 
-const mergedTypes = mergeTypes(allTypes);
+const mergedTypes = mergeTypes(allTypes, { all: true });
 const mergedResolvers = mergeResolvers(allResolvers);
 
 const schema = makeExecutableSchema({
