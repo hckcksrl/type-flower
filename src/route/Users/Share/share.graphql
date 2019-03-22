@@ -1,0 +1,7 @@
+type Users {
+  id: Int!
+  email: String!
+  password: String!
+  images : [Images]
+  library : [Library]
+}
