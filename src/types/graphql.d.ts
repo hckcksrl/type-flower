@@ -58,6 +58,7 @@ export interface Mutation {
   CreateImage: CreateImageResponse;
   DeleteImage: DeleteImageResponse;
   CreateLibrary: CreateLibraryResponse;
+  CreateFlower: CreateFlowerResonse;
 }
 
 export interface EmailLoginResponse {
@@ -87,6 +88,11 @@ export interface CreateLibraryResponse {
   error: string | null;
 }
 
+export interface CreateFlowerResonse {
+  result: boolean;
+  error: string | null;
+}
+
 export interface EmailLoginArgs {
   email: string;
   password: string;
@@ -110,5 +116,15 @@ export interface DeleteImageArgs {
 
 export interface CreateLibraryArgs {
   name: string;
-  userid: number;
+}
+
+export interface CreateFlowerArgs {
+  input: {
+    image: string;
+    name: string;
+    type: string;
+    color: string;
+    content: string;
+    weather: string;
+  };
 }
