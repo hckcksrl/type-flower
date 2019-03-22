@@ -1,0 +1,27 @@
+type Library {
+  id: Int!
+  name: String!
+  usersid: Int!
+}
+type Query {
+  GetImage: GetImageResponse
+  GetLibrary: GetLibraryResponse
+  GetFlower: GetFlowerResponse
+}
+type GetImageResponse {
+  result: Boolean!
+  error: String
+  image: [Images]
+}
+
+type GetLibraryResponse {
+  result: Boolean!
+  error: String
+  library: [Library]
+}
+
+type GetFlowerResponse {
+  result: Boolean!
+  error: String
+  flower: [Flowers]
+}
