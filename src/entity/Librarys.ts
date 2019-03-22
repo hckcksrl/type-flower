@@ -15,6 +15,10 @@ export class Librarys extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   name: string;
 
-  @ManyToOne(type => Users, users => users.id)
-  users: Users[];
+  @ManyToOne(type => Users, users => users.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
+  users: Users;
 }
