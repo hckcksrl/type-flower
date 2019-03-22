@@ -57,7 +57,8 @@ type Mutation {
   EmailRegist(email : String! , password : String!): EmailRegistResonse
   CreateImage(image : String! , userid : Int!, flowerid : [Int]): CreateImageResponse
   DeleteImage(id : Int! , userid : Int!): DeleteImageResponse
-  CreateLibrary(name : String! , userid : Int!): CreateLibraryResponse
+  CreateLibrary(name : String!): CreateLibraryResponse
+  CreateFlower( input : FlowerInput ) : CreateFlowerResonse
 }
 
 type EmailLoginResponse {
@@ -85,4 +86,19 @@ type DeleteImageResponse {
 type CreateLibraryResponse {
   result: Boolean!
   error: String
+}
+
+type CreateFlowerResonse{
+  result: Boolean!
+  error: String
+}
+
+
+input FlowerInput{
+  image: String!
+  name: String!
+  type: String!
+  color: String!
+  content: String!
+  weather: String!
 }
