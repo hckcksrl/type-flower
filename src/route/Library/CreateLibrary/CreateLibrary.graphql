@@ -1,0 +1,9 @@
+type Mutation {
+  CreateLibrary(name : String!): CreateLibraryResponse
+}
+
+type CreateLibraryResponse {
+  result: Boolean!
+  error: String
+}
+
