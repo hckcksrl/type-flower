@@ -1,6 +1,7 @@
 import { EmailLoginResponse, EmailLoginArgs } from "../../../types/graphql";
 import { Users } from "../../../entity/Users";
 import { Resolvers } from "../../../types/resolvers";
+import CreateJwt from "../../../helper/createjwt";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -14,18 +15,25 @@ const resolvers: Resolvers = {
         if (!user) {
           return {
             result: false,
-            error: "error",
+            error: "not exist",
             token: null
           };
         }
         if (password === user.password) {
+          const token = CreateJwt(user.email);
           return {
             result: true,
             error: null,
-            token: "true"
+            token
           };
         }
-      } catch (error) {}
+      } catch (error) {
+        return {
+          result: false,
+          error: error.message,
+          token: null
+        };
+      }
     }
   }
 };
