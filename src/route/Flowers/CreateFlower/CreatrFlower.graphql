@@ -1,0 +1,17 @@
+type Mutation {
+  CreateFlower( input : FlowerInput ): CreateFlowerResonse
+}
+
+input FlowerInput{
+  image: String!
+  name: String!
+  type: String!
+  color: String!
+  content: String!
+  weather: String!
+}
+
+type CreateFlowerResonse{
+  result : Boolean!
+  error : String
+}
