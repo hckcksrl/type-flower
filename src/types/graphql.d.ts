@@ -1,3 +1,6 @@
+import { DeepPartial } from "apollo-env";
+import { Flower_Image } from "../entity/Flower_Image";
+
 export interface Users {
   id: number;
   email: string;
@@ -105,13 +108,11 @@ export interface EmailRegistArgs {
 
 export interface CreateImageArgs {
   image: string;
-  userid: number;
-  flowerid: Array<number> | null;
+  flowerid: Array<DeepPartial<Flower_Image>> | null;
 }
 
 export interface DeleteImageArgs {
   id: number;
-  userid: number;
 }
 
 export interface CreateLibraryArgs {
