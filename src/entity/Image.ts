@@ -5,7 +5,8 @@ import {
   BaseEntity,
   ManyToOne,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  OneToMany
 } from "typeorm";
 import { Users } from "./Users";
 import { Flowers } from "./Flowers";
@@ -26,10 +27,15 @@ export class Images extends BaseEntity {
   })
   users: Users;
 
-  @ManyToOne(type => Flower_Image, flower_image => flower_image.id, {
+  @OneToMany(type => Flower_Image, flower_image => flower_image.id, {
     cascade: true,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onDelete: "CASCADE"
   })
   flower_image: Flower_Image[];
+  // @ManyToMany(type => Flowers, flowers => flowers.id, {
+  //   cascade: true,
+  //   onDelete: "CASCADE"
+  // })
+  // @JoinTable()
+  // flowers: Flowers[];
 }
