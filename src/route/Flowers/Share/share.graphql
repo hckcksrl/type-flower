@@ -6,4 +6,5 @@ type Flowers {
   color: String!
   content: String!
   weather: String!
+  images : [Images]
 }
