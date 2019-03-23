@@ -2,21 +2,23 @@ import {
   CreateLibraryArgs,
   CreateLibraryResponse
 } from "../../../types/graphql";
-import { Users } from "../../../entity/Users";
 import { Resolvers } from "../../../types/resolvers";
 import { Librarys } from "../../../entity/Librarys";
+import { DeepPartial } from "typeorm";
+import { Users } from "../../../entity/Users";
 
 const resolvers: Resolvers = {
   Mutation: {
     CreateLibrary: async (
       _,
       args: CreateLibraryArgs,
-      { req }
+      { context }
     ): Promise<CreateLibraryResponse> => {
+      const user: DeepPartial<Users> = context;
       try {
         await Librarys.create({
           name: args.name,
-          users: req.id
+          users: user
         }).save();
         return {
           result: true,
