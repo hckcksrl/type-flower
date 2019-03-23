@@ -55,8 +55,8 @@ type Query {
 type Mutation {
   EmailLogin(email: String! , password : String!): EmailLoginResponse
   EmailRegist(email : String! , password : String!): EmailRegistResonse
-  CreateImage(image : String! , userid : Int!, flowerid : [Int]): CreateImageResponse
-  DeleteImage(id : Int! , userid : Int!): DeleteImageResponse
+  CreateImage(image : String! , flowerid : [Int]): CreateImageResponse
+  DeleteImage(id : Int! ): DeleteImageResponse
   CreateLibrary(name : String!): CreateLibraryResponse
   CreateFlower( input : FlowerInput ) : CreateFlowerResonse
 }
