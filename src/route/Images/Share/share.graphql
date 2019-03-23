@@ -2,4 +2,5 @@ type Images {
   id: Int!
   image: String!
   usersid : Int!
+  flowers : [Flowers]
 }
