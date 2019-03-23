@@ -20,8 +20,8 @@ export class Users extends BaseEntity {
   password: string;
 
   @OneToMany(type => Images, images => images.id)
-  images = Images;
+  images: Images[];
 
   @OneToMany(type => Librarys, librarys => librarys.id)
-  librarys = Librarys;
+  librarys: Librarys[];
 }
