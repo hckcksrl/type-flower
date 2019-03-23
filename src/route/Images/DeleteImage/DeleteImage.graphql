@@ -1,0 +1,7 @@
+type Mutation {
+      DeleteImage(id : Int! ): DeleteImageResponse
+}
+type DeleteImageResponse {
+  result: Boolean!
+  error: String
+}
