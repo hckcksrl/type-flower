@@ -3,8 +3,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  ManyToOne
+  OneToMany,
+  ManyToMany,
+  JoinTable
 } from "typeorm";
+
 import { Images } from "./Image";
 import { Flower_Image } from "./Flower_Image";
 
@@ -31,10 +34,15 @@ export class Flowers extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   weather: string;
 
-  @ManyToOne(type => Flower_Image, flower_image => flower_image.id, {
+  @OneToMany(type => Flower_Image, flower_image => flower_image.id, {
     cascade: true,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onDelete: "CASCADE"
   })
   flower_image: Flower_Image[];
+
+  // @ManyToMany(type => Images, images => images.id, {
+  //   cascade: true,
+  //   onDelete: "CASCADE"
+  // })
+  // images: Images[];
 }
