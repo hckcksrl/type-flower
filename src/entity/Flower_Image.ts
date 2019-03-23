@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, BaseEntity } from "typeorm";
 import { Flowers } from "./Flowers";
 import { Images } from "./Image";
 
 @Entity({ name: "flower_image" })
-export class Flower_Image {
+export class Flower_Image extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
