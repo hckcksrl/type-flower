@@ -1,0 +1,8 @@
+type Mutation {
+      CreateImage(image : String! , flowerid : [Int]): CreateImageResponse
+}
+
+type CreateImageResponse {
+  result: Boolean!
+  error: String
+}
