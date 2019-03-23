@@ -4,6 +4,7 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import DecodeJwt from "./helper/decodejwt";
+import { DeepPartial } from "apollo-env";
 
 export class Apollo {
   public server: ApolloServer;
@@ -11,6 +12,7 @@ export class Apollo {
     this.server = new ApolloServer({
       schema,
       context: ({ req }): any => {
+        // const user : DeepPartial<Users>= req.body.user
         return {
           req: req.body.user
         };
