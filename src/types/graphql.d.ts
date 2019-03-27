@@ -1,34 +1,37 @@
 import { DeepPartial } from "apollo-env";
-import { Flower_Image } from "../entity/Flower_Image";
+// import { Flower_Image } from "../entity/Flower_Image";
 
 export interface Users {
-  id: number;
   email: string;
   password: string;
   images: Array<Images> | null;
   library: Array<Library> | null;
+  createUser: string;
+  updateUser: string;
 }
 
 export interface Images {
-  id: number;
   image: string;
   usersid: number;
+  createImage: string;
+  updateImage: string;
 }
 
 export interface Library {
-  id: number;
   name: string;
   usersid: number;
+  createLibrary: string;
 }
 
 export interface Flowers {
-  id: number;
   image: string;
   name: string;
   type: string;
   color: string;
   content: string;
   weather: string;
+  createFlower: string;
+  updateFlower: string;
 }
 
 export interface GetImageResponse {
@@ -108,7 +111,7 @@ export interface EmailRegistArgs {
 
 export interface CreateImageArgs {
   image: string;
-  flowerid: Array<DeepPartial<Flower_Image>> | null;
+  flowerid: Array<number> | null;
 }
 
 export interface DeleteImageArgs {
@@ -120,12 +123,14 @@ export interface CreateLibraryArgs {
 }
 
 export interface CreateFlowerArgs {
-  input: {
-    image: string;
-    name: string;
-    type: string;
-    color: string;
-    content: string;
-    weather: string;
-  };
+  input: InputFlowers;
+}
+
+export interface InputFlowers {
+  image: string;
+  name: string;
+  type: string;
+  color: string;
+  content: string;
+  weather: string;
 }
