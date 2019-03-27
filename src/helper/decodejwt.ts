@@ -4,7 +4,7 @@ import { Users } from "../entity/Users";
 const DecodeJwt = async (token: string): Promise<any> => {
   try {
     const decode = jwt.verify(token, "1234" || "");
-    const user = await Users.findOne({
+    const user: Users = await Users.findOne({
       where: {
         email: decode.toString()
       }
