@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
     ): Promise<EmailRegistResonse> => {
       const { email, password } = args;
       try {
-        const user = await Users.findOne({ email });
+        const user: Users = await Users.findOne({ email });
         if (user) {
           return {
             result: false,
@@ -19,8 +19,8 @@ const resolvers: Resolvers = {
             token: null
           };
         } else {
-          const regist = await Users.create({ ...args }).save();
-          const token = CreateJwt(regist.email);
+          const regist: Users = await Users.create({ ...args }).save();
+          const token: string = CreateJwt(regist.email);
           return {
             result: true,
             error: null,
