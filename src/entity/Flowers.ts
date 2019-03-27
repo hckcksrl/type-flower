@@ -5,7 +5,9 @@ import {
   BaseEntity,
   OneToMany,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 
 import { Images } from "./Image";
@@ -34,6 +36,9 @@ export class Flowers extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   weather: string;
 
+  @Column({ type: "bigint", nullable: false, default: 0 })
+  hits: number;
+
   @OneToMany(type => Flower_Image, flower_image => flower_image.id, {
     cascade: true,
     onDelete: "CASCADE"
@@ -45,4 +50,10 @@ export class Flowers extends BaseEntity {
   //   onDelete: "CASCADE"
   // })
   // images: Images[];
+
+  @CreateDateColumn()
+  createFlower: string;
+
+  @UpdateDateColumn()
+  updateFlower: string;
 }
