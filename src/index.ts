@@ -1,9 +1,11 @@
 import "reflect-metadata";
 import { Apollo, App } from "./app";
 import { createConnection } from "typeorm";
+import { ApolloServer } from "apollo-server-express";
+import { Application } from "express";
 
-const server = new Apollo().server;
-const app = new App().express;
+const server: ApolloServer = new Apollo().server;
+const app: Application = new App().express;
 
 server.applyMiddleware({ app });
 
