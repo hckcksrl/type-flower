@@ -1,4 +1,8 @@
-import { CreateFlowerArgs, CreateFlowerResonse } from "../../../types/graphql";
+import {
+  CreateFlowerArgs,
+  CreateFlowerResonse,
+  InputFlowers
+} from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Flowers } from "../../../entity/Flowers";
 
@@ -8,10 +12,9 @@ const resolvers: Resolvers = {
       _,
       args: CreateFlowerArgs
     ): Promise<CreateFlowerResonse> => {
-      console.log(args.input);
+      const flowers: InputFlowers = args.input;
       try {
-        const flower = await Flowers.create({ ...args.input }).save();
-        console.log(flower);
+        const flower: Flowers = await Flowers.create({ ...flowers }).save();
         if (flower) {
           return {
             result: true,
