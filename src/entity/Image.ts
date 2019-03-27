@@ -6,7 +6,9 @@ import {
   ManyToOne,
   ManyToMany,
   JoinTable,
-  OneToMany
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 import { Users } from "./Users";
 import { Flowers } from "./Flowers";
@@ -20,6 +22,9 @@ export class Images extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   image: string;
 
+  @Column({ type: "bigint", nullable: false, default: 0 })
+  hits: number;
+
   @ManyToOne(type => Users, users => users.id, {
     cascade: true,
     onDelete: "CASCADE",
@@ -32,10 +37,17 @@ export class Images extends BaseEntity {
     onDelete: "CASCADE"
   })
   flower_image: Flower_Image[];
+
   // @ManyToMany(type => Flowers, flowers => flowers.id, {
   //   cascade: true,
   //   onDelete: "CASCADE"
   // })
   // @JoinTable()
   // flowers: Flowers[];
+
+  @CreateDateColumn()
+  createImage: string;
+
+  @UpdateDateColumn()
+  updateImage: string;
 }
