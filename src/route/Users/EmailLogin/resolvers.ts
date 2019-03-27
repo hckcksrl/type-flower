@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
     ): Promise<EmailLoginResponse> => {
       const { email, password } = args;
       try {
-        const user = await Users.findOne({ email });
+        const user: Users = await Users.findOne({ email });
         if (!user) {
           return {
             result: false,
@@ -20,7 +20,7 @@ const resolvers: Resolvers = {
           };
         }
         if (password === user.password) {
-          const token = CreateJwt(user.email);
+          const token: string = CreateJwt(user.email);
           return {
             result: true,
             error: null,
