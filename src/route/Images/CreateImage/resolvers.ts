@@ -1,8 +1,10 @@
 import { CreateImageArgs, CreateFlowerResonse } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Images } from "../../../entity/Image";
-import { Flower_Image } from "../../../entity/Flower_Image";
 import { DeepPartial } from "typeorm";
+import { Users } from "../../../entity/Users";
+import { Flowers } from "../../../entity/Flowers";
+import { Flower_Image } from "../../../entity/Flower_Image";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -11,47 +13,27 @@ const resolvers: Resolvers = {
       args: CreateImageArgs,
       { req }
     ): Promise<CreateFlowerResonse> => {
-      console.log(req);
+      const user: DeepPartial<Users> = req;
       try {
-        // await Images.create({ image: args.image, users: req.id })
-        //   .save()
-        //   .then((result: any) => {
-        // args.flowerid.map(flowerid => {
-        //   Flower_Image.create({
-        //     images: result.id,
-        //     flowers: flowerid
-        //   }).save();
-        // });
-        //     return {
-        //       result: true,
-        //       error: null
-        //     };
-        //   })
-        //   .catch(error => {
-        //     return {
-        //       result: false,
-        //       error: error.message
-        //     };
-        //   });
-        const result: DeepPartial<Images> = await Images.create({
+        const images: Images = await Images.create({
           image: args.image,
-          users: req.id
+          users: user
         }).save();
-        if (result) {
-          args.flowerid.map((flowerid: DeepPartial<Flower_Image>) => {
-            Flower_Image.create({
-              images: result,
-              flowers: flowerid
+        if (images) {
+          let length: number = args.flowerid.length;
+          while (length - 1 >= 0) {
+            const flower: Flowers = await Flowers.findOne({
+              id: args.flowerid[length - 1]
+            });
+            await Flower_Image.create({
+              images: images,
+              flowers: flower
             }).save();
-          });
+            length = length - 1;
+          }
           return {
             result: true,
             error: null
-          };
-        } else {
-          return {
-            result: false,
-            error: "don't create"
           };
         }
       } catch (error) {
