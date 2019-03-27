@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  ManyToOne
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 import { Users } from "./Users";
 
@@ -21,4 +23,7 @@ export class Librarys extends BaseEntity {
     onUpdate: "CASCADE"
   })
   users: Users;
+
+  @CreateDateColumn()
+  createLibrary: string;
 }
