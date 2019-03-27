@@ -2,6 +2,7 @@ import { DeleteImageArgs, DeleteImageResponse } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Images } from "../../../entity/Image";
 import { DeepPartial } from "typeorm";
+import { Users } from "../../../entity/Users";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -10,10 +11,13 @@ const resolvers: Resolvers = {
       args: DeleteImageArgs,
       { req }
     ): Promise<DeleteImageResponse> => {
+      const users: Users = req;
       try {
-        const image = await Images.findOne({ id: args.id });
+        const image: Images = await Images.findOne(args.id, {
+          relations: ["users"]
+        });
         if (image) {
-          if (image.users === req.id) {
+          if (image.users.id === users.id) {
             image.remove();
             return {
               result: true,
@@ -40,3 +44,5 @@ const resolvers: Resolvers = {
     }
   }
 };
+
+export default resolvers;
