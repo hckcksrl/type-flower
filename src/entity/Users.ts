@@ -3,10 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 import { Images } from "./Image";
 import { Librarys } from "./Librarys";
+import { Like } from "./Like";
 
 @Entity({ name: "users" })
 export class Users extends BaseEntity {
@@ -24,4 +27,13 @@ export class Users extends BaseEntity {
 
   @OneToMany(type => Librarys, librarys => librarys.id)
   librarys: Librarys[];
+
+  @OneToMany(type => Like, like => like.id)
+  like: Like[];
+
+  @CreateDateColumn()
+  createUser: string;
+
+  @UpdateDateColumn()
+  updateUser: string;
 }
