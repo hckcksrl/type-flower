@@ -4,7 +4,6 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import DecodeJwt from "./helper/decodejwt";
-import { DeepPartial } from "apollo-env";
 import { Users } from "./entity/Users";
 
 export class Apollo {
