@@ -1,0 +1,8 @@
+type Mutation{
+  UpHitImage( id : Int! ) : UpHitImageResponse
+}
+
+type UpHitImageResponse{
+  result : Boolean!
+  error : String
+}
