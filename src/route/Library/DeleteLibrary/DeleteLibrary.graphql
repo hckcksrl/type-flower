@@ -1,0 +1,8 @@
+type Mutation{
+      DeleteLibrary(id : Int!) : DeleteLibraryResponse
+}
+
+type DeleteLibraryResponse{
+  result : Boolean!
+  error : String
+}
