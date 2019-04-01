@@ -1,11 +1,10 @@
 import { DeepPartial } from "apollo-env";
-// import { Flower_Image } from "../entity/Flower_Image";
 
 export interface Users {
   email: string;
   password: string;
-  images: Array<Images> | null;
-  library: Array<Library> | null;
+  images: Array<Images> | undefined;
+  library: Array<Library> | undefined;
   createUser: string;
   updateUser: string;
 }
@@ -36,20 +35,20 @@ export interface Flowers {
 
 export interface GetImageResponse {
   result: boolean;
-  error: string | null;
-  image: Array<Images> | null;
+  error: string | undefined;
+  image: Array<Images> | undefined;
 }
 
 export interface GetLibraryResponse {
   result: boolean;
-  error: string | null;
-  library: Array<Library> | null;
+  error: string | undefined;
+  library: Array<Library> | undefined;
 }
 
 export interface GetFlowerResponse {
   result: boolean;
-  error: string | null;
-  flower: Array<Flowers> | null;
+  error: string | undefined;
+  flower: Array<Flowers> | undefined;
 }
 
 export interface Query {
@@ -61,42 +60,84 @@ export interface Query {
 export interface Mutation {
   EmailLogin: EmailLoginResponse;
   EmailRegist: EmailRegistResonse;
+
   CreateImage: CreateImageResponse;
   DeleteImage: DeleteImageResponse;
+
   CreateLibrary: CreateLibraryResponse;
-  CreateFlower: CreateFlowerResonse;
+  DeleteLibrary: DeleteLibraryResponse;
+
+  CreateFlower: CreateFlowerResponse;
+
+  UpHitImage: UpHitImageResponse;
+  UpHitFlower: UpHitFlowerResponse;
+
+  CreateComment: CreateCommentResponse;
+  DeleteComment: DeleteCommentResponse;
+
+  Like: LikeResponse;
+}
+
+export interface LikeResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface DeleteLibraryResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface DeleteCommentResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface CreateCommentResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface UpHitImageResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface UpHitFlowerResponse {
+  result: boolean;
+  error: string | undefined;
 }
 
 export interface EmailLoginResponse {
   result: boolean;
-  error: string | null;
-  token: string | null;
+  error: string | undefined;
+  token: string | undefined;
 }
 
 export interface EmailRegistResonse {
   result: boolean;
-  error: string | null;
-  token: string | null;
+  error: string | undefined;
+  token: string | undefined;
 }
 
 export interface CreateImageResponse {
   result: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 export interface DeleteImageResponse {
   result: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 export interface CreateLibraryResponse {
   result: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
-export interface CreateFlowerResonse {
+export interface CreateFlowerResponse {
   result: boolean;
-  error: string | null;
+  error: string | undefined;
 }
 
 export interface EmailLoginArgs {
@@ -111,7 +152,7 @@ export interface EmailRegistArgs {
 
 export interface CreateImageArgs {
   image: string;
-  flowerid: Array<number> | null;
+  flowerid: Array<number> | undefined;
 }
 
 export interface DeleteImageArgs {
@@ -129,8 +170,34 @@ export interface CreateFlowerArgs {
 export interface InputFlowers {
   image: string;
   name: string;
-  type: string;
   color: string;
   content: string;
   weather: string;
+}
+
+export interface UpHitImageArgs {
+  id: number;
+}
+export interface UpHitFlowerArgs {
+  id: number;
+}
+
+export interface CreateCommentArgs {
+  comment: string;
+  imageid: number | undefined;
+  flowerid: number | undefined;
+  commentid: number | undefined;
+}
+
+export interface DeleteCommentArgs {
+  id: number;
+}
+
+export interface DeleteLibraryArgs {
+  id: number;
+}
+
+export interface LikeArgs {
+  flowerid: number | undefined;
+  commentid: number | undefined;
 }
