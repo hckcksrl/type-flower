@@ -1,0 +1,8 @@
+type Mutation{
+    CreateComment(comment : String! , imageid : Int , flowerid : Int , commentid : Int):CreateCommentResponse
+}
+
+type CreateCommentResponse{
+    result : Boolean!
+    error : String
+}
