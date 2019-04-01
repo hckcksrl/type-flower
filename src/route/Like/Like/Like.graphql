@@ -1,0 +1,7 @@
+type Mutation {
+  Like(flowerid:Int , commentid : Int) : LikeResponse
+}
+type LikeResponse{
+  result : Boolean!
+  error : String
+}
