@@ -9,7 +9,8 @@ import {
 } from "typeorm";
 import { Images } from "./Image";
 import { Librarys } from "./Librarys";
-import { Like } from "./Like";
+import { Likes } from "./Likes";
+import { Comment } from "./Comment";
 
 @Entity({ name: "users" })
 export class Users extends BaseEntity {
@@ -28,8 +29,11 @@ export class Users extends BaseEntity {
   @OneToMany(type => Librarys, librarys => librarys.id)
   librarys: Librarys[];
 
-  @OneToMany(type => Like, like => like.id)
-  like: Like[];
+  @OneToMany(type => Likes, like => like.id)
+  like: Likes[];
+
+  @OneToMany(type => Comment, comment => comment.id)
+  comment: Comment[];
 
   @CreateDateColumn()
   createUser: string;
