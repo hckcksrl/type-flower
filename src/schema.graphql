@@ -14,7 +14,6 @@ type Flowers {
   id: Int!
   image: String!
   name: String!
-  type: String!
   color: String!
   content: String!
   weather: String!
@@ -58,7 +57,43 @@ type Mutation {
   CreateImage(image : String! , flowerid : [Int]): CreateImageResponse
   DeleteImage(id : Int! ): DeleteImageResponse
   CreateLibrary(name : String!): CreateLibraryResponse
-  CreateFlower( input : FlowerInput ) : CreateFlowerResonse
+  DeleteLibrary(id : Int!) : DeleteLibraryResponse
+  CreateFlower( input : FlowerInput ) : CreateFlowerResponse
+  UpHitImage( id : Int! ) : UpHitImageResponse
+  UpHitFlower( id : Int! ) : UpHitFlowereResponse
+  CreateComment( comment : String! , imageid : Int , flowerid : Int , commentid : Int) : CreateCommentResponse
+  DeleteComment( id : Int!) : DeleteCommentResponse
+  Like(flowerid:Int , commentid : Int) : LikeResponse
+}
+
+type LikeResponse{
+  result : Boolean!
+  error : String
+}
+
+type DeleteLibraryResponse{
+  result : Boolean!
+  error : String
+}
+
+type DeleteCommentResponse{
+  result : Boolean!
+  error : String
+}
+
+type CreateCommentResponse{
+  result : Boolean!
+  error : String
+}
+
+type UpHitImageResponse{
+  result : Boolean!
+  error : String
+}
+
+type UpHitFlowereResponse{
+  result : Boolean!
+  error : String
 }
 
 type EmailLoginResponse {
@@ -88,7 +123,7 @@ type CreateLibraryResponse {
   error: String
 }
 
-type CreateFlowerResonse{
+type CreateFlowerResponse{
   result: Boolean!
   error: String
 }
@@ -97,7 +132,6 @@ type CreateFlowerResonse{
 input FlowerInput{
   image: String!
   name: String!
-  type: String!
   color: String!
   content: String!
   weather: String!
