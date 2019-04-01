@@ -1,0 +1,7 @@
+type Mutation{
+    UpHitFlower(id: Int!) : UpHitFlowerResponse
+}
+type UpHitFlowerResponse{
+    result : Boolean!
+    error : String
+}
