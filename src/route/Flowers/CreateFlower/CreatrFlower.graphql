@@ -1,17 +1,16 @@
 type Mutation {
-  CreateFlower( input : FlowerInput ): CreateFlowerResonse
+  CreateFlower( input : FlowerInput ): CreateFlowerResponse
 }
 
 input FlowerInput{
   image: String!
   name: String!
-  type: String!
   color: String!
   content: String!
   weather: String!
 }
 
-type CreateFlowerResonse{
+type CreateFlowerResponse{
   result : Boolean!
   error : String
 }
