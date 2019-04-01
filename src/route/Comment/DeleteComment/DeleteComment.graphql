@@ -1,0 +1,8 @@
+type Mutation{
+  DeleteComment( id : Int!) : DeleteCommentResponse
+}
+
+type DeleteCommentResponse{
+  result : Boolean!
+  error : String
+}
