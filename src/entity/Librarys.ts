@@ -5,9 +5,11 @@ import {
   BaseEntity,
   ManyToOne,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from "typeorm";
 import { Users } from "./Users";
+import { SaveFlower } from "./SaveFlower";
 
 @Entity({ name: "librarys" })
 export class Librarys extends BaseEntity {
@@ -24,6 +26,12 @@ export class Librarys extends BaseEntity {
   })
   users: Users;
 
+  @OneToMany(type => SaveFlower, saveFlower => saveFlower.id)
+  saveFlower: SaveFlower[];
+
   @CreateDateColumn()
   createLibrary: string;
+
+  @UpdateDateColumn()
+  updateLibrary: string;
 }
