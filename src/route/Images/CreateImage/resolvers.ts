@@ -1,10 +1,9 @@
-import { CreateImageArgs, CreateFlowerResonse } from "../../../types/graphql";
+import { CreateImageArgs, CreateImageResponse } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Images } from "../../../entity/Image";
-import { DeepPartial } from "typeorm";
+import { DeepPartial, In } from "typeorm";
 import { Users } from "../../../entity/Users";
 import { Flowers } from "../../../entity/Flowers";
-import { Flower_Image } from "../../../entity/Flower_Image";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -12,28 +11,34 @@ const resolvers: Resolvers = {
       _,
       args: CreateImageArgs,
       { req }
-    ): Promise<CreateFlowerResonse> => {
+    ): Promise<CreateImageResponse> => {
       const user: DeepPartial<Users> = req;
       try {
-        const images: Images = await Images.create({
-          image: args.image,
-          users: user
-        }).save();
-        if (images) {
-          let length: number = args.flowerid.length;
-          while (length - 1 >= 0) {
-            const flower: Flowers = await Flowers.findOne({
-              id: args.flowerid[length - 1]
-            });
-            await Flower_Image.create({
-              images: images,
-              flowers: flower
-            }).save();
-            length = length - 1;
+        const flowers: Array<DeepPartial<Flowers>> = await Flowers.find({
+          where: { id: In(args.flowerid) }
+        });
+        if (flowers) {
+          const image: Images = await Images.create({
+            image: args.image,
+            hits: 0,
+            flowers: flowers,
+            users: user
+          }).save();
+          if (image) {
+            return {
+              result: true,
+              error: null
+            };
+          } else {
+            return {
+              result: false,
+              error: "Image Not Create"
+            };
           }
+        } else {
           return {
-            result: true,
-            error: null
+            result: false,
+            error: "Flowers Not Exist"
           };
         }
       } catch (error) {
@@ -64,3 +69,25 @@ export default resolvers;
 //         .execute();
 //     });
 //   });
+
+// const images: Images = await Images.create({
+//   image: args.image,
+//   users: user
+// }).save();
+// if (images) {
+//   let length: number = args.flowerid.length;
+//   while (length - 1 >= 0) {
+//     const flower: Flowers = await Flowers.findOne({
+//       id: args.flowerid[length - 1]
+//     });
+//     await Flower_Image.create({
+//       images: images,
+//       flowers: flower
+//     }).save();
+//     length = length - 1;
+//   }
+//   return {
+//     result: true,
+//     error: null
+//   };
+// }
