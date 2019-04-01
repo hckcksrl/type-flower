@@ -3,27 +3,41 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
-  ManyToMany,
-  OneToMany
+  ManyToOne
 } from "typeorm";
 import { Flowers } from "./Flowers";
 import { Images } from "./Image";
+import { Users } from "./Users";
 
-@Entity()
+@Entity({ name: "comment" })
 export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: "text", nullable: false })
   comment: string;
 
-  @ManyToOne(type => Flowers, flowers => flowers.id)
+  @ManyToOne(type => Users, users => users.id, {
+    onDelete: "CASCADE",
+    cascade: true
+  })
+  users: Users;
+
+  @ManyToOne(type => Flowers, flowers => flowers.id, {
+    onDelete: "CASCADE",
+    cascade: true
+  })
   flowers: Flowers;
 
-  @ManyToOne(type => Images, images => images.id)
+  @ManyToOne(type => Images, images => images.id, {
+    onDelete: "CASCADE",
+    cascade: true
+  })
   images: Images;
 
-  @OneToMany(type => Comment, incomment => incomment.id)
-  incomment: Comment[];
+  @ManyToOne(type => Comment, incomment => incomment.id, {
+    onDelete: "CASCADE",
+    cascade: true
+  })
+  incomment: Comment;
 }
