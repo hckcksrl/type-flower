@@ -3,15 +3,16 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany,
   ManyToMany,
-  JoinTable,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 
 import { Images } from "./Image";
-import { Flower_Image } from "./Flower_Image";
+import { Type } from "./Type";
+import { SaveFlower } from "./SaveFlower";
 
 @Entity({ name: "flowers" })
 export class Flowers extends BaseEntity {
@@ -25,31 +26,28 @@ export class Flowers extends BaseEntity {
   name: string;
 
   @Column({ type: "varchar", nullable: false })
-  type: string;
-
-  @Column({ type: "varchar", nullable: false })
-  color: string;
-
-  @Column({ type: "varchar", nullable: false })
   content: string;
 
-  @Column({ type: "varchar", nullable: false })
+  @Column({ type: "varchar", nullable: false, default: "spring" })
   weather: string;
 
-  @Column({ type: "bigint", nullable: false, default: 0 })
+  @Column({ type: "integer", nullable: false, default: 0 })
   hits: number;
 
-  @OneToMany(type => Flower_Image, flower_image => flower_image.id, {
+  @ManyToOne(type => Type, type => type.id, {
     cascade: true,
     onDelete: "CASCADE"
   })
-  flower_image: Flower_Image[];
+  type: Type;
 
-  // @ManyToMany(type => Images, images => images.id, {
-  //   cascade: true,
-  //   onDelete: "CASCADE"
-  // })
-  // images: Images[];
+  @ManyToMany(type => Images, images => images.id, {
+    cascade: true,
+    onDelete: "CASCADE"
+  })
+  images: Images[];
+
+  @OneToMany(type => SaveFlower, saveFlower => saveFlower.id)
+  saveFlower: SaveFlower[];
 
   @CreateDateColumn()
   createFlower: string;
