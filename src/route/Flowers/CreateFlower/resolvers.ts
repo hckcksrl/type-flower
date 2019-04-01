@@ -1,6 +1,6 @@
 import {
   CreateFlowerArgs,
-  CreateFlowerResonse,
+  CreateFlowerResponse,
   InputFlowers
 } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
@@ -11,7 +11,7 @@ const resolvers: Resolvers = {
     CreateFlower: async (
       _,
       args: CreateFlowerArgs
-    ): Promise<CreateFlowerResonse> => {
+    ): Promise<CreateFlowerResponse> => {
       const flowers: InputFlowers = args.input;
       try {
         const flower: Flowers = await Flowers.create({ ...flowers }).save();
