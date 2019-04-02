@@ -1,7 +1,11 @@
 type Users {
-  id: Int!
+  id : Int!
   email: String!
   password: String!
-  images : [Images]
-  library : [Library]
+  images: [Images]
+  library: [Library]
+  like: [Like]
+  comment: [Comment]
+  createUser: String!
+  updateUser: String!
 }
