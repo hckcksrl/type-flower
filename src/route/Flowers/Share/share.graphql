@@ -1,9 +1,13 @@
 type Flowers {
-  id: Int!
+  id : Int!
   image: String!
   name: String!
-  type: String!
-  color: String!
   content: String!
   weather: String!
+  hits: Int!
+  type: FlowerType
+  images: [Images]
+  saveFlower: SaveFlower
+  createFlower: String!
+  updateFlower: String!
 }
