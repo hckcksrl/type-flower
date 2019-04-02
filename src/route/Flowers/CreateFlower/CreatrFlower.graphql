@@ -1,5 +1,5 @@
 type Mutation {
-  CreateFlower( input : FlowerInput ): CreateFlowerResponse
+  CreateFlower( input : FlowerInput ,typeid : Int!): CreateFlowerResponse
 }
 
 input FlowerInput{
