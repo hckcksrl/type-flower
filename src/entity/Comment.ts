@@ -29,12 +29,6 @@ export class Comment extends BaseEntity {
   })
   flowers: Flowers;
 
-  @ManyToOne(type => Images, images => images.id, {
-    onDelete: "CASCADE",
-    cascade: true
-  })
-  images: Images;
-
   @ManyToOne(type => Comment, incomment => incomment.id, {
     onDelete: "CASCADE",
     cascade: true
