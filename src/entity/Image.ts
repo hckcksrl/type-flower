@@ -20,9 +20,6 @@ export class Images extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   image: string;
 
-  @Column({ type: "integer", nullable: false, default: 0 })
-  hits: number;
-
   @ManyToOne(type => Users, users => users.id, {
     cascade: true,
     onDelete: "CASCADE",
@@ -30,12 +27,12 @@ export class Images extends BaseEntity {
   })
   users: Users;
 
-  @ManyToMany(type => Flowers, flowers => flowers.id, {
+  @ManyToOne(type => Flowers, flowers => flowers.id, {
     cascade: true,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
   })
-  @JoinTable()
-  flowers: Flowers[];
+  flowers: Flowers;
 
   @CreateDateColumn()
   createImage: string;
