@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
         }).save();
         return {
           result: true,
-          error: null
+          error: undefined
         };
       } catch (error) {
         return {
