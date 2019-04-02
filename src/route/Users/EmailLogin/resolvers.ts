@@ -16,14 +16,14 @@ const resolvers: Resolvers = {
           return {
             result: false,
             error: "not exist",
-            token: null
+            token: undefined
           };
         }
         if (password === user.password) {
           const token: string = CreateJwt(user.email);
           return {
             result: true,
-            error: null,
+            error: undefined,
             token
           };
         }
@@ -31,7 +31,7 @@ const resolvers: Resolvers = {
         return {
           result: false,
           error: error.message,
-          token: null
+          token: undefined
         };
       }
     }
