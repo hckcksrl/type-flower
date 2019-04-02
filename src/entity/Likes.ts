@@ -15,9 +15,6 @@ export class Likes extends BaseEntity {
   @ManyToOne(type => Flowers, flowers => flowers.id)
   flowers: Flowers;
 
-  @ManyToOne(type => Images, images => images.id)
-  images: Images;
-
   @ManyToOne(type => Comment, comment => comment.id)
   comment: Comment;
 }
