@@ -26,7 +26,11 @@ export class Librarys extends BaseEntity {
   })
   users: Users;
 
-  @OneToMany(type => SaveFlower, saveFlower => saveFlower.id)
+  @OneToMany(type => SaveFlower, saveFlower => saveFlower.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
   saveFlower: SaveFlower[];
 
   @CreateDateColumn()
