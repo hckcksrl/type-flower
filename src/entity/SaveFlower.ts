@@ -9,13 +9,15 @@ export class SaveFlower extends BaseEntity {
 
   @ManyToOne(type => Librarys, library => library.id, {
     cascade: true,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
   })
   library: Librarys;
 
   @ManyToOne(type => Flowers, flowers => flowers.id, {
     cascade: true,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
   })
   flowers: Flowers;
 }
