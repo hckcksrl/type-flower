@@ -1,34 +1,70 @@
-import { DeepPartial } from "apollo-env";
-
 export interface Users {
+  id: number;
   email: string;
   password: string;
   images: Array<Images> | undefined;
   library: Array<Library> | undefined;
+  like: Array<Like> | undefined;
+  comment: Array<Comment> | undefined;
   createUser: string;
   updateUser: string;
 }
 
+export interface Like {
+  id: number;
+  users: Users;
+  flowers: Flowers | undefined;
+  comment: Comment | undefined;
+}
+
+export interface Comment {
+  id: number;
+  comment: string;
+  users: Users;
+  flowers: Flowers | undefined;
+  incomment: number | undefined;
+}
+
 export interface Images {
+  id: number;
   image: string;
   usersid: number;
   createImage: string;
   updateImage: string;
+  flowers: Flowers;
 }
 
 export interface Library {
+  id: number;
   name: string;
-  usersid: number;
+  users: Users;
+  saveFlower: SaveFlower | undefined;
   createLibrary: string;
+  updateLibrary: string;
+}
+
+export interface SaveFlower {
+  id: number;
+  library: Array<Library> | undefined;
+  flowers: Array<Flowers> | undefined;
+}
+
+export interface FlowerType {
+  id: number;
+  name: string;
+  flowers: Array<Flowers> | undefined;
 }
 
 export interface Flowers {
+  id: number;
   image: string;
   name: string;
-  type: string;
-  color: string;
   content: string;
   weather: string;
+  hits: number;
+  type: FlowerType;
+  images: Array<Images> | undefined;
+  saveFlower: SaveFlower | undefined;
   createFlower: string;
   updateFlower: string;
 }
@@ -66,16 +102,40 @@ export interface Mutation {
 
   CreateLibrary: CreateLibraryResponse;
   DeleteLibrary: DeleteLibraryResponse;
+  EditLibrary: EditLibraryResponse;
 
   CreateFlower: CreateFlowerResponse;
+  DeleteFlower: DeleteFlowerResponse;
 
-  UpHitImage: UpHitImageResponse;
   UpHitFlower: UpHitFlowerResponse;
 
   CreateComment: CreateCommentResponse;
   DeleteComment: DeleteCommentResponse;
 
   Like: LikeResponse;
+
+  CreateFlowerType: CreateFlowerTypeResponse;
+  DeleteFlowerType: DeleteFlowerTypeResponse;
+}
+
+export interface DeleteFlowerTypeResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface CreateFlowerTypeResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface DeleteFlowerResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface EditLibraryResponse {
+  result: boolean;
+  error: string | undefined;
 }
 
 export interface LikeResponse {
@@ -94,11 +154,6 @@ export interface DeleteCommentResponse {
 }
 
 export interface CreateCommentResponse {
-  result: boolean;
-  error: string | undefined;
-}
-
-export interface UpHitImageResponse {
   result: boolean;
   error: string | undefined;
 }
@@ -152,7 +207,7 @@ export interface EmailRegistArgs {
 
 export interface CreateImageArgs {
   image: string;
-  flowerid: Array<number> | undefined;
+  flowerid: number | undefined;
 }
 
 export interface DeleteImageArgs {
@@ -165,6 +220,7 @@ export interface CreateLibraryArgs {
 
 export interface CreateFlowerArgs {
   input: InputFlowers;
+  typeid: number;
 }
 
 export interface InputFlowers {
@@ -175,9 +231,6 @@ export interface InputFlowers {
   weather: string;
 }
 
-export interface UpHitImageArgs {
-  id: number;
-}
 export interface UpHitFlowerArgs {
   id: number;
 }
@@ -200,4 +253,21 @@ export interface DeleteLibraryArgs {
 export interface LikeArgs {
   flowerid: number | undefined;
   commentid: number | undefined;
+}
+
+export interface EditLibraryArgs {
+  id: number;
+  name: string;
+}
+
+export interface DeleteFlowerArgs {
+  id: number;
+}
+
+export interface CreateFlowerTypeArgs {
+  name: string;
+}
+
+export interface DeleteFlowerTypeArgs {
+  id: number;
 }
