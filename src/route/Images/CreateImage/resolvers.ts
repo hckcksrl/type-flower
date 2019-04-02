@@ -1,7 +1,6 @@
 import { CreateImageArgs, CreateImageResponse } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Images } from "../../../entity/Image";
-import { DeepPartial, In } from "typeorm";
 import { Users } from "../../../entity/Users";
 import { Flowers } from "../../../entity/Flowers";
 
@@ -12,22 +11,19 @@ const resolvers: Resolvers = {
       args: CreateImageArgs,
       { req }
     ): Promise<CreateImageResponse> => {
-      const user: DeepPartial<Users> = req;
+      const user: Users = req;
       try {
-        const flowers: Array<DeepPartial<Flowers>> = await Flowers.find({
-          where: { id: In(args.flowerid) }
-        });
+        const flowers: Flowers = await Flowers.findOne({ id: args.flowerid });
         if (flowers) {
           const image: Images = await Images.create({
             image: args.image,
-            hits: 0,
             flowers: flowers,
             users: user
           }).save();
           if (image) {
             return {
               result: true,
-              error: null
+              error: undefined
             };
           } else {
             return {
