@@ -1,0 +1,7 @@
+type Comment {
+  id : Int!
+  comment: String!
+  users: Users!
+  flowers: Flowers
+  incomment: Int
+}
