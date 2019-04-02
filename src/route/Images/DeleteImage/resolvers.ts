@@ -1,7 +1,6 @@
 import { DeleteImageArgs, DeleteImageResponse } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Images } from "../../../entity/Image";
-import { DeepPartial } from "typeorm";
 import { Users } from "../../../entity/Users";
 
 const resolvers: Resolvers = {
@@ -21,7 +20,7 @@ const resolvers: Resolvers = {
             image.remove();
             return {
               result: true,
-              error: null
+              error: undefined
             };
           } else {
             return {
