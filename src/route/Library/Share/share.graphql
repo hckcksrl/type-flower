@@ -1,13 +1,18 @@
 type Library {
-  id: Int!
+  id : Int!
   name: String!
-  usersid: Int!
+  users: Users!
+  saveFlower: SaveFlower
+  createLibrary: String!
+  updateLibrary: String!
 }
+
 type Query {
   GetImage: GetImageResponse
   GetLibrary: GetLibraryResponse
   GetFlower: GetFlowerResponse
 }
+
 type GetImageResponse {
   result: Boolean!
   error: String
