@@ -27,30 +27,12 @@ const resolvers: Resolvers = {
             }).save();
             return {
               result: true,
-              error: null
+              error: undefined
             };
           } else {
             return {
               result: false,
               error: "flower not exist"
-            };
-          }
-        } else if (args.imageid) {
-          const image: Images = await Images.findOne({ id: args.imageid });
-          if (image) {
-            await Comment.create({
-              comment: args.comment,
-              users: user,
-              images: image
-            }).save();
-            return {
-              result: true,
-              error: null
-            };
-          } else {
-            return {
-              result: false,
-              error: "image not exist"
             };
           }
         } else if (args.commentid) {
@@ -65,7 +47,7 @@ const resolvers: Resolvers = {
             }).save();
             return {
               result: true,
-              error: null
+              error: undefined
             };
           } else {
             return {
