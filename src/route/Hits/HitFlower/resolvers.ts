@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
         await Flowers.update({ id: args.id }, { hits: flower.hits + 1 });
         return {
           result: true,
-          error: null
+          error: undefined
         };
       } catch (error) {
         return {
