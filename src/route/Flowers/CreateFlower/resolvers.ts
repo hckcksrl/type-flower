@@ -5,6 +5,7 @@ import {
 } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Flowers } from "../../../entity/Flowers";
+import { FlowerType } from "../../../entity/FlowerType";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -14,11 +15,17 @@ const resolvers: Resolvers = {
     ): Promise<CreateFlowerResponse> => {
       const flowers: InputFlowers = args.input;
       try {
-        const flower: Flowers = await Flowers.create({ ...flowers }).save();
+        const flowerType: FlowerType = await FlowerType.findOne({
+          id: args.typeid
+        });
+        const flower: Flowers = await Flowers.create({
+          ...flowers,
+          flowerType: flowerType
+        }).save();
         if (flower) {
           return {
             result: true,
-            error: null
+            error: undefined
           };
         } else {
           return {
