@@ -1,0 +1,8 @@
+type Mutation {
+  EditLibrary(id : Int! , name  : String!) : EditLibraryResponse
+}
+
+type EditLibraryResponse{
+  result : Boolean!
+  error : String
+}
