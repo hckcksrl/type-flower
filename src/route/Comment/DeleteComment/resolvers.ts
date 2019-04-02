@@ -15,7 +15,7 @@ const resolvers: Resolvers = {
     ): Promise<DeleteCommentResponse> => {
       const user: Users = req;
       try {
-        const comment = await Comment.findOne(
+        const comment: Comment = await Comment.findOne(
           { id: args.id },
           { relations: ["users"] }
         );
