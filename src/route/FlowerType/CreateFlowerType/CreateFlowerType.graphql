@@ -1,0 +1,8 @@
+type Mutation {
+  CreateFlowerType(name : String!): CreateFlowerTypeResponse
+}
+
+type CreateFlowerTypeResponse{
+  result : Boolean!
+  error : String
+}
