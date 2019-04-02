@@ -1,30 +1,73 @@
+
 type Images {
-  id: Int!
+  id : Int!
   image: String!
-  usersid : Int!
+  usersid: Int!
+  createImage: String!
+  updateImage: String!
+  flowers: Flowers!
 }
 
 type Library {
-  id: Int!
+  id : Int!
   name: String!
-  usersid: Int!
+  users: Users!
+  saveFlower: SaveFlower
+  createLibrary: String!
+  updateLibrary: String!
+}
+
+type SaveFlower {
+  id : Int!
+  library: [Library]
+  flowers: [Flowers]
+}
+
+type FlowerType {
+  id : Int!
+  name: String!
+  flowers: [Flowers]
+}
+
+type Comment {
+  id : Int!
+  comment: String!
+  users: Users!
+  flowers: Flowers
+  incomment: Int
+}
+
+type Like {
+  id : Int!
+  users: Users!
+  flowers: Flowers
+  comment: Comment
 }
 
 type Flowers {
-  id: Int!
+  id : Int!
   image: String!
   name: String!
-  color: String!
   content: String!
   weather: String!
+  hits: Int!
+  type: FlowerType
+  images: [Images]
+  saveFlower: SaveFlower
+  createFlower: String!
+  updateFlower: String!
 }
 
 type Users {
-  id: Int!
+  id : Int!
   email: String!
   password: String!
-  images : [Images]
-  library : [Library]
+  images: [Images]
+  library: [Library]
+  like: [Like]
+  comment: [Comment]
+  createUser: String!
+  updateUser: String!
 }
 
 type GetImageResponse {
@@ -54,16 +97,39 @@ type Query {
 type Mutation {
   EmailLogin(email: String! , password : String!): EmailLoginResponse
   EmailRegist(email : String! , password : String!): EmailRegistResonse
-  CreateImage(image : String! , flowerid : [Int]): CreateImageResponse
+  CreateImage(image : String! , flowerid : Int!): CreateImageResponse
   DeleteImage(id : Int! ): DeleteImageResponse
   CreateLibrary(name : String!): CreateLibraryResponse
   DeleteLibrary(id : Int!) : DeleteLibraryResponse
-  CreateFlower( input : FlowerInput ) : CreateFlowerResponse
-  UpHitImage( id : Int! ) : UpHitImageResponse
+  EditLibrary(id : Int! , name  : String!) : EditLibraryResponse
+  CreateFlower( input : FlowerInput , typeid : Int!) : CreateFlowerResponse
+  DeleteFlower( id : Int!) : DeleteFlowerResponse
   UpHitFlower( id : Int! ) : UpHitFlowereResponse
   CreateComment( comment : String! , imageid : Int , flowerid : Int , commentid : Int) : CreateCommentResponse
   DeleteComment( id : Int!) : DeleteCommentResponse
   Like(flowerid:Int , commentid : Int) : LikeResponse
+  CreateFlowerType(name : String!): CreateFlowerTypeResponse
+  DeleteFlowerType(id : Int!): DeleteFlowerTypeResponse
+}
+
+type CreateFlowerTypeResponse{
+  result : Boolean!
+  error : String
+}
+
+type DeleteFlowerTypeResponse{
+  result : Boolean!
+  error : String
+}
+
+type DeleteFlowerResponse{
+  result : Boolean!
+  error : String
+}
+
+type EditLibraryResponse{
+  result : Boolean!
+  error : String
 }
 
 type LikeResponse{
@@ -82,11 +148,6 @@ type DeleteCommentResponse{
 }
 
 type CreateCommentResponse{
-  result : Boolean!
-  error : String
-}
-
-type UpHitImageResponse{
   result : Boolean!
   error : String
 }
