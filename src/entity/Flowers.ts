@@ -7,11 +7,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  JoinTable
 } from "typeorm";
 
 import { Images } from "./Image";
-import { Type } from "./Type";
+import { FlowerType } from "./FlowerType";
 import { SaveFlower } from "./SaveFlower";
 
 @Entity({ name: "flowers" })
@@ -34,19 +35,25 @@ export class Flowers extends BaseEntity {
   @Column({ type: "integer", nullable: false, default: 0 })
   hits: number;
 
-  @ManyToOne(type => Type, type => type.id, {
+  @ManyToOne(type => FlowerType, flowerType => flowerType.id, {
     cascade: true,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
   })
-  type: Type;
+  flowerType: FlowerType;
 
-  @ManyToMany(type => Images, images => images.id, {
+  @OneToMany(type => Images, images => images.id, {
     cascade: true,
-    onDelete: "CASCADE"
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
   })
   images: Images[];
 
-  @OneToMany(type => SaveFlower, saveFlower => saveFlower.id)
+  @OneToMany(type => SaveFlower, saveFlower => saveFlower.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
   saveFlower: SaveFlower[];
 
   @CreateDateColumn()
