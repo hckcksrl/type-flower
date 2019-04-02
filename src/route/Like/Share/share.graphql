@@ -1,0 +1,6 @@
+type Like {
+  id : Int!
+  users: Users!
+  flowers: Flowers
+  comment: Comment
+}
