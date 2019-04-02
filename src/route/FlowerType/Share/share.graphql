@@ -1,0 +1,5 @@
+type FlowerType {
+  id : Int!
+  name: String!
+  flowers: [Flowers]
+}
