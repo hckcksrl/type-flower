@@ -16,14 +16,14 @@ const resolvers: Resolvers = {
           return {
             result: false,
             error: "user exist",
-            token: null
+            token: undefined
           };
         } else {
           const regist: Users = await Users.create({ ...args }).save();
           const token: string = CreateJwt(regist.email);
           return {
             result: true,
-            error: null,
+            error: undefined,
             token
           };
         }
@@ -31,7 +31,7 @@ const resolvers: Resolvers = {
         return {
           result: false,
           error: error.message,
-          token: null
+          token: undefined
         };
       }
     }
