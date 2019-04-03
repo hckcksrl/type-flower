@@ -14,6 +14,7 @@ import {
 import { Images } from "./Image";
 import { FlowerType } from "./FlowerType";
 import { SaveFlower } from "./SaveFlower";
+import { Recent } from "./Recent";
 
 @Entity({ name: "flowers" })
 export class Flowers extends BaseEntity {
@@ -55,6 +56,13 @@ export class Flowers extends BaseEntity {
     onUpdate: "CASCADE"
   })
   saveFlower: SaveFlower[];
+
+  @OneToMany(type => Recent, recent => recent.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
+  recent: Recent[];
 
   @CreateDateColumn()
   createFlower: string;
