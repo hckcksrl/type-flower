@@ -18,7 +18,8 @@ const resolvers: Resolvers = {
           const image: Images = await Images.create({
             image: args.image,
             flowers: flowers,
-            users: user
+            users: user,
+            content: args.content
           }).save();
           if (image) {
             return {
