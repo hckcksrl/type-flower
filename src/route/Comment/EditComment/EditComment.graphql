@@ -1,0 +1,8 @@
+type Mutation{
+    EditComment(id : Int! , comment : String!) : EditCommentResponse
+}
+
+type EditCommentResponse{
+    result : Boolean!
+    error :String
+}
