@@ -1,3 +1,10 @@
+type Recent {
+  id : Int!
+  users : Users!
+  flowers : Flowers!
+  createRecent : String!
+  updateRecent : String!
+}
 
 type Images {
   id : Int!
@@ -54,6 +61,7 @@ type Flowers {
   type: FlowerType
   images: [Images]
   saveFlower: SaveFlower
+  recent : [Recent]
   createFlower: String!
   updateFlower: String!
 }
@@ -66,6 +74,7 @@ type Users {
   library: [Library]
   like: [Like]
   comment: [Comment]
+  recent : [Recent]
   createUser: String!
   updateUser: String!
 }
@@ -97,19 +106,43 @@ type Query {
 type Mutation {
   EmailLogin(email: String! , password : String!): EmailLoginResponse
   EmailRegist(email : String! , password : String!): EmailRegistResonse
-  CreateImage(image : String! , flowerid : Int!): CreateImageResponse
+  CreateImage(image : String! ,content : String , flowerid : Int!): CreateImageResponse
   DeleteImage(id : Int! ): DeleteImageResponse
+  EditImage(id : Int! ,image: String!, content : String, flowerid : Int) : EditImageResponse
   CreateLibrary(name : String!): CreateLibraryResponse
   DeleteLibrary(id : Int!) : DeleteLibraryResponse
   EditLibrary(id : Int! , name  : String!) : EditLibraryResponse
-  CreateFlower( input : FlowerInput , typeid : Int!) : CreateFlowerResponse
+  CreateFlower( input : FlowerInput! , typeid : Int!) : CreateFlowerResponse
   DeleteFlower( id : Int!) : DeleteFlowerResponse
+  EditFlower(id : Int! , input : FlowerInput! , typeid : Int ) : EditFlowerResponse
   UpHitFlower( id : Int! ) : UpHitFlowereResponse
-  CreateComment( comment : String! , imageid : Int , flowerid : Int , commentid : Int) : CreateCommentResponse
+  CreateComment( comment : String! , flowerid : Int , commentid : Int) : CreateCommentResponse
   DeleteComment( id : Int!) : DeleteCommentResponse
+  EditComment(id : Int! , comment : String!) : EditCommentResponse
   Like(flowerid:Int , commentid : Int) : LikeResponse
   CreateFlowerType(name : String!): CreateFlowerTypeResponse
   DeleteFlowerType(id : Int!): DeleteFlowerTypeResponse
+  EditFlowerType(id : Int! , name : String!) : EditFlowerTypeResponse
+}
+
+type EditImageResponse {
+    result : Boolean!
+    error : String
+}
+
+type EditFlowerTypeResponse{
+  result : Boolean!
+  error : String
+}
+
+type EditFlowerResponse{
+  result : Boolean!
+  error : String
+}
+
+type EditCommentResponse{
+  result : Boolean!
+  error : String
 }
 
 type CreateFlowerTypeResponse{
@@ -193,7 +226,6 @@ type CreateFlowerResponse{
 input FlowerInput{
   image: String!
   name: String!
-  color: String!
   content: String!
   weather: String!
 }
