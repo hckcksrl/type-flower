@@ -12,9 +12,9 @@ const resolvers: Resolvers = {
     CreateLibrary: async (
       _,
       args: CreateLibraryArgs,
-      { context }
+      { req }
     ): Promise<CreateLibraryResponse> => {
-      const user: DeepPartial<Users> = context;
+      const user: Users = req;
       try {
         await Librarys.create({
           name: args.name,
