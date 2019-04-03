@@ -1,0 +1,8 @@
+type Mutation{
+    EditFlowerType(id : Int! , name : String!) : EditFlowerTypeResponse
+}
+
+type EditFlowerTypeResponse{
+    result : Boolean!
+    error : String
+}
