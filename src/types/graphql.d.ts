@@ -6,8 +6,17 @@ export interface Users {
   library: Array<Library> | undefined;
   like: Array<Like> | undefined;
   comment: Array<Comment> | undefined;
+  recent: Array<Recent> | undefined;
   createUser: string;
   updateUser: string;
+}
+
+export interface Recent {
+  id: number;
+  users: Users;
+  flowers: Flowers;
+  createRecent: string;
+  updateRecent: string;
 }
 
 export interface Like {
@@ -28,6 +37,7 @@ export interface Comment {
 export interface Images {
   id: number;
   image: string;
+  content: string | undefined;
   usersid: number;
   createImage: string;
   updateImage: string;
@@ -65,6 +75,7 @@ export interface Flowers {
   type: FlowerType;
   images: Array<Images> | undefined;
   saveFlower: SaveFlower | undefined;
+  recent: Array<Recent> | undefined;
   createFlower: string;
   updateFlower: string;
 }
@@ -99,6 +110,7 @@ export interface Mutation {
 
   CreateImage: CreateImageResponse;
   DeleteImage: DeleteImageResponse;
+  EditImage: EditImageResponse;
 
   CreateLibrary: CreateLibraryResponse;
   DeleteLibrary: DeleteLibraryResponse;
@@ -106,16 +118,39 @@ export interface Mutation {
 
   CreateFlower: CreateFlowerResponse;
   DeleteFlower: DeleteFlowerResponse;
+  EditFlower: EditFlowerResponse;
 
   UpHitFlower: UpHitFlowerResponse;
 
   CreateComment: CreateCommentResponse;
   DeleteComment: DeleteCommentResponse;
+  EditComment: EditCommentResponse;
 
   Like: LikeResponse;
 
   CreateFlowerType: CreateFlowerTypeResponse;
   DeleteFlowerType: DeleteFlowerTypeResponse;
+  EditFlowerType: EditFlowerTypeResponse;
+}
+
+export interface EditImageResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface EditFlowerTypeResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface EditFlowerResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface EditCommentResponse {
+  result: boolean;
+  error: string | undefined;
 }
 
 export interface DeleteFlowerTypeResponse {
@@ -207,6 +242,7 @@ export interface EmailRegistArgs {
 
 export interface CreateImageArgs {
   image: string;
+  content: string | undefined;
   flowerid: number | undefined;
 }
 
@@ -226,7 +262,6 @@ export interface CreateFlowerArgs {
 export interface InputFlowers {
   image: string;
   name: string;
-  color: string;
   content: string;
   weather: string;
 }
@@ -237,7 +272,6 @@ export interface UpHitFlowerArgs {
 
 export interface CreateCommentArgs {
   comment: string;
-  imageid: number | undefined;
   flowerid: number | undefined;
   commentid: number | undefined;
 }
@@ -270,4 +304,27 @@ export interface CreateFlowerTypeArgs {
 
 export interface DeleteFlowerTypeArgs {
   id: number;
+}
+
+export interface EditCommentArgs {
+  id: number;
+  comment: string;
+}
+
+export interface EditFlowerArgs {
+  id: number;
+  input: InputFlowers;
+  typeid: number | undefined;
+}
+
+export interface EditFlowerTypeArgs {
+  id: number;
+  name: string;
+}
+
+export interface EditImageArgs {
+  id: number;
+  image: string;
+  content: string | undefined;
+  flowerid: number | undefined;
 }
