@@ -2,14 +2,6 @@ type Mutation {
   CreateFlower( input : FlowerInput ,typeid : Int!): CreateFlowerResponse
 }
 
-input FlowerInput{
-  image: String!
-  name: String!
-  color: String!
-  content: String!
-  weather: String!
-}
-
 type CreateFlowerResponse{
   result : Boolean!
   error : String
