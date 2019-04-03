@@ -1,0 +1,8 @@
+type Mutation {
+    EditImage(id : Int! , image : String! ,content : String, flowerid : Int) : EditImageResponse
+}
+
+type EditImageResponse {
+    result : Boolean!
+    error : String
+}
