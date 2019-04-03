@@ -9,12 +9,24 @@ export class Likes extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(type => Users, users => users.id)
+  @ManyToOne(type => Users, users => users.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
   users: Users;
 
-  @ManyToOne(type => Flowers, flowers => flowers.id)
+  @ManyToOne(type => Flowers, flowers => flowers.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
   flowers: Flowers;
 
-  @ManyToOne(type => Comment, comment => comment.id)
+  @ManyToOne(type => Comment, comment => comment.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
   comment: Comment;
 }
