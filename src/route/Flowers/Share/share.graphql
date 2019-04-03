@@ -11,3 +11,10 @@ type Flowers {
   createFlower: String!
   updateFlower: String!
 }
+
+input FlowerInput{
+  image: String!
+  name: String!
+  content: String!
+  weather: String!
+}
