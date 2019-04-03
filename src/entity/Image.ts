@@ -20,6 +20,9 @@ export class Images extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   image: string;
 
+  @Column({ type: "text", nullable: true })
+  content: string;
+
   @ManyToOne(type => Users, users => users.id, {
     cascade: true,
     onDelete: "CASCADE",
