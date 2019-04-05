@@ -6,6 +6,7 @@ type Users {
   library: [Library]
   like: [Like]
   comment: [Comment]
+  recent : [Recent]
   createUser: String!
   updateUser: String!
 }
