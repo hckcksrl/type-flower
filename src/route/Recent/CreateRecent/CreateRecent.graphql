@@ -1,0 +1,8 @@
+type Mutation{
+    CreateRecent(id : Int!) : CreateRecentResponse
+}
+
+type CreateRecentResponse{
+    result : Boolean!
+    error : String
+}
