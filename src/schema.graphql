@@ -123,11 +123,29 @@ type Mutation {
   CreateFlowerType(name : String!): CreateFlowerTypeResponse
   DeleteFlowerType(id : Int!): DeleteFlowerTypeResponse
   EditFlowerType(id : Int! , name : String!) : EditFlowerTypeResponse
+  CreateRecent(id : Int!) : CreateRecentResponse
+  CreateSaveFlower(flowerid : Int! , libraryid : Int!) : CreateSaveFlowerResponse
+  DeleteSaveFlower(id : Int!) : DeleteSaveFlowerResponse
+}
+
+type DeleteSaveFlowerResponse{
+  result : Boolean!
+  error : String
+}
+
+type CreateSaveFlowerResponse{
+  result : Boolean!
+  error : String
+}
+
+type CreateRecentResponse{
+  result : Boolean!
+  error : String
 }
 
 type EditImageResponse {
-    result : Boolean!
-    error : String
+  result : Boolean!
+  error : String
 }
 
 type EditFlowerTypeResponse{
