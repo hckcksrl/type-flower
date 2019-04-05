@@ -1,0 +1,7 @@
+type Recent {
+  id : Int!
+  users : Users!
+  flowers : Flowers!
+  createRecent : String!
+  updateRecent : String!
+}
