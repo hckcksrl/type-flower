@@ -1,0 +1,8 @@
+type Mutation {
+    DeleteSaveFlower(id : Int!) : DeleteSaveFlowerResponse
+}
+
+type DeleteSaveFlowerResponse{
+  result : Boolean!
+  error : String
+}
