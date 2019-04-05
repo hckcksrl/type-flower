@@ -1,0 +1,8 @@
+type Mutation {
+    CreateSaveFlower(flowerid : Int! , libraryid : Int!) : CreateSaveFlowerResponse
+}
+
+type CreateSaveFlowerResponse{
+  result : Boolean!
+  error : String
+}
