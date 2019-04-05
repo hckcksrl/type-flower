@@ -131,6 +131,26 @@ export interface Mutation {
   CreateFlowerType: CreateFlowerTypeResponse;
   DeleteFlowerType: DeleteFlowerTypeResponse;
   EditFlowerType: EditFlowerTypeResponse;
+
+  CreateRecent: CreateRecentResponse;
+
+  CreateSaveFlower: CreateSaveFlowerResponse;
+  DeleteSaveFlower: DeleteSaveFlowerResponse;
+}
+
+export interface DeleteSaveFlowerResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface CreateSaveFlowerResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface CreateRecentResponse {
+  result: boolean;
+  error: string | undefined;
 }
 
 export interface EditImageResponse {
@@ -327,4 +347,17 @@ export interface EditImageArgs {
   image: string;
   content: string | undefined;
   flowerid: number | undefined;
+}
+
+export interface CreateRecentArgs {
+  id: number;
+}
+
+export interface CreateSaveFlowerArgs {
+  flowerid: number;
+  libraryid: number;
+}
+
+export interface DeleteSaveFlowerArgs {
+  id: number;
 }
