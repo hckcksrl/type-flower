@@ -1,8 +1,0 @@
-type Mutation {
-  DeleteFlower( id : Int!) : DeleteFlowerResponse
-}
-
-type DeleteFlowerResponse{
-  result : Boolean!
-  error : String
-}
