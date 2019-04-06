@@ -1,8 +1,6 @@
-
 type Images {
   id : Int!
   image: String!
-  usersid: Int!
   createImage: String!
   updateImage: String!
   flowers: Flowers!
