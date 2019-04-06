@@ -24,38 +24,35 @@ export class Users extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   password: string;
 
-  @OneToMany(type => Images, images => images.id, {
-    cascade: true,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE"
-  })
-  images: Images[];
-
   @OneToMany(type => Librarys, librarys => librarys.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   librarys: Librarys[];
 
   @OneToMany(type => Likes, like => like.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   like: Likes[];
 
   @OneToMany(type => Comment, comment => comment.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   comment: Comment[];
 
   @OneToMany(type => Recent, recent => recent.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   recent: Recent[];
 
