@@ -10,24 +10,14 @@ const resolvers: Resolvers = {
       args: DeleteImageArgs,
       { req }
     ): Promise<DeleteImageResponse> => {
-      const users: Users = req;
       try {
-        const image: Images = await Images.findOne(args.id, {
-          relations: ["users"]
-        });
+        const image: Images = await Images.findOne(args.id);
         if (image) {
-          if (image.users.id === users.id) {
-            image.remove();
-            return {
-              result: true,
-              error: undefined
-            };
-          } else {
-            return {
-              result: false,
-              error: "Not Create User"
-            };
-          }
+          image.remove();
+          return {
+            result: true,
+            error: undefined
+          };
         } else {
           return {
             result: false,
