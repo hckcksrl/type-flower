@@ -5,10 +5,10 @@ type Flowers {
   content: String!
   weather: String!
   hits: Int!
-  type: FlowerType
+  type: FlowerType!
   images: [Images]
+  saveFlower: [SaveFlower]
   recent : [Recent]
-  saveFlower: SaveFlower
   createFlower: String!
   updateFlower: String!
 }
