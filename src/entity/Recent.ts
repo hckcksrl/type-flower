@@ -17,14 +17,16 @@ export class Recent extends BaseEntity {
   @ManyToOne(type => Users, users => users.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: false
   })
   users: Users;
 
   @ManyToOne(type => Flowers, flowers => flowers.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: false
   })
   flowers: Flowers;
 
