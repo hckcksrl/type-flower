@@ -9,25 +9,24 @@ type Recent {
 type Images {
   id : Int!
   image: String!
-  usersid: Int!
   createImage: String!
   updateImage: String!
   flowers: Flowers!
 }
 
-type Library {
+type Librarys{
   id : Int!
   name: String!
   users: Users!
-  saveFlower: SaveFlower
+  saveFlower: [SaveFlower]
   createLibrary: String!
   updateLibrary: String!
 }
 
 type SaveFlower {
   id : Int!
-  library: [Library]
-  flowers: [Flowers]
+  librarys: Librarys!
+  flowers: Flowers!
 }
 
 type FlowerType {
@@ -41,7 +40,7 @@ type Comment {
   comment: String!
   users: Users!
   flowers: Flowers
-  incomment: Int
+  incomment: Comment
 }
 
 type Like {
@@ -58,9 +57,9 @@ type Flowers {
   content: String!
   weather: String!
   hits: Int!
-  type: FlowerType
+  type: FlowerType!
   images: [Images]
-  saveFlower: SaveFlower
+  saveFlower: [SaveFlower]
   recent : [Recent]
   createFlower: String!
   updateFlower: String!
@@ -70,8 +69,7 @@ type Users {
   id : Int!
   email: String!
   password: String!
-  images: [Images]
-  library: [Library]
+  librarys: [Librarys]
   like: [Like]
   comment: [Comment]
   recent : [Recent]
@@ -79,28 +77,49 @@ type Users {
   updateUser: String!
 }
 
-type GetImageResponse {
+type GetRecentResponse {
   result: Boolean!
   error: String
-  image: [Images]
+  recent: [Recent]
 }
 
 type GetLibraryResponse {
   result: Boolean!
   error: String
-  library: [Library]
+  librarys: [Librarys]
 }
 
-type GetFlowerResponse {
+type GetSaveFlowerResponse {
   result: Boolean!
   error: String
-  flower: [Flowers]
+  saveFlower: [SaveFlower]
+}
+
+type GetFlowerTypeResponse{
+  result : Boolean!
+  error : String
+  type : [FlowerType]
+}
+
+type GetFlowersResponse{
+  result : Boolean!
+  error : String
+  flowers : [Flowers]
+}
+
+type GetCommentResponse{
+  result : Boolean!
+  error : String
+  comment : [Comment]
 }
 
 type Query {
-  GetImage: GetImageResponse
+  GetRecent: GetRecentResponse
   GetLibrary: GetLibraryResponse
-  GetFlower: GetFlowerResponse
+  GetSaveFlower(libraryid : Int!): GetSaveFlowerResponse
+  GetFlowerType : GetFlowerTypeResponse
+  GetFlowers(typeid : Int!) : GetFlowersResponse
+  GetComment(flowersid : Int!) : GetCommentResponse
 }
 
 type Mutation {
