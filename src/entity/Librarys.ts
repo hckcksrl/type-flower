@@ -22,7 +22,8 @@ export class Librarys extends BaseEntity {
   @ManyToOne(type => Users, users => users.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: false
   })
   users: Users;
 
