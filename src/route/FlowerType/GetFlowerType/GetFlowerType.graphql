@@ -1,0 +1,9 @@
+type GetFlowerTypeResponse{
+  result:Boolean!
+  error : String
+  type : [FlowerType]
+}
+
+type Query {
+  GetFlowerType : GetFlowerTypeResponse
+}
