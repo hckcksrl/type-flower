@@ -1,0 +1,9 @@
+type GetRecentResponse {
+  result: Boolean!
+  error: String
+  recent: [Recent]
+}
+
+type Query {
+  GetRecent: GetRecentResponse
+}
