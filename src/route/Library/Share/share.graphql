@@ -1,32 +1,8 @@
-type Library {
+type Librarys{
   id : Int!
   name: String!
   users: Users!
-  saveFlower: SaveFlower
+  saveFlower: [SaveFlower]
   createLibrary: String!
   updateLibrary: String!
-}
-
-type Query {
-  GetImage: GetImageResponse
-  GetLibrary: GetLibraryResponse
-  GetFlower: GetFlowerResponse
-}
-
-type GetImageResponse {
-  result: Boolean!
-  error: String
-  image: [Images]
-}
-
-type GetLibraryResponse {
-  result: Boolean!
-  error: String
-  library: [Library]
-}
-
-type GetFlowerResponse {
-  result: Boolean!
-  error: String
-  flower: [Flowers]
 }
