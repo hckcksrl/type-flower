@@ -1,0 +1,9 @@
+type Query{
+    GetFlowers(typeid : Int!) : GetFlowersResponse
+}
+
+type GetFlowersResponse {
+    result : Boolean!
+    error : String
+    flowers : [Flowers]
+}
