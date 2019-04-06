@@ -7,17 +7,19 @@ export class SaveFlower extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(type => Librarys, library => library.id, {
+  @ManyToOne(type => Librarys, librarys => librarys.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: false
   })
-  library: Librarys;
+  librarys: Librarys;
 
   @ManyToOne(type => Flowers, flowers => flowers.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: false
   })
   flowers: Flowers;
 }
