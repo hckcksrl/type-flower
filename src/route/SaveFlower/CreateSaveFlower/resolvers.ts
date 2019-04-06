@@ -21,7 +21,7 @@ const resolvers: Resolvers = {
         if (library) {
           const saveFlower: SaveFlower = await SaveFlower.findOne({
             flowers: flower,
-            library: library
+            librarys: library
           });
           if (saveFlower) {
             return {
@@ -31,7 +31,7 @@ const resolvers: Resolvers = {
           } else {
             await SaveFlower.create({
               flowers: flower,
-              library: library
+              librarys: library
             }).save();
             return {
               result: true,

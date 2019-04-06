@@ -4,7 +4,6 @@ import {
 } from "../../../types/graphql";
 import { Resolvers } from "../../../types/resolvers";
 import { Librarys } from "../../../entity/Librarys";
-import { DeepPartial } from "typeorm";
 import { Users } from "../../../entity/Users";
 
 const resolvers: Resolvers = {
