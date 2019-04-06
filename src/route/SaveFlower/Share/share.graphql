@@ -1,5 +1,5 @@
 type SaveFlower {
   id : Int!
-  library: [Library]
-  flowers: [Flowers]
+  librarys: Librarys!
+  flowers: Flowers!
 }
