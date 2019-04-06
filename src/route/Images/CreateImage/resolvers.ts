@@ -11,14 +11,12 @@ const resolvers: Resolvers = {
       args: CreateImageArgs,
       { req }
     ): Promise<CreateImageResponse> => {
-      const user: Users = req;
       try {
         const flowers: Flowers = await Flowers.findOne({ id: args.flowerid });
         if (flowers) {
           const image: Images = await Images.create({
             image: args.image,
             flowers: flowers,
-            users: user,
             content: args.content
           }).save();
           if (image) {
