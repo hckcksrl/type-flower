@@ -2,8 +2,7 @@ type Users {
   id : Int!
   email: String!
   password: String!
-  images: [Images]
-  library: [Library]
+  librarys: [Librarys]
   like: [Like]
   comment: [Comment]
   recent : [Recent]
