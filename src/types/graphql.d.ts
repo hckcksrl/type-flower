@@ -2,8 +2,7 @@ export interface Users {
   id: number;
   email: string;
   password: string;
-  images: Array<Images> | undefined;
-  library: Array<Library> | undefined;
+  librarys: Array<Librarys> | undefined;
   like: Array<Like> | undefined;
   comment: Array<Comment> | undefined;
   recent: Array<Recent> | undefined;
@@ -31,32 +30,31 @@ export interface Comment {
   comment: string;
   users: Users;
   flowers: Flowers | undefined;
-  incomment: number | undefined;
+  incomment: Comment | undefined;
 }
 
 export interface Images {
   id: number;
   image: string;
   content: string | undefined;
-  usersid: number;
   createImage: string;
   updateImage: string;
   flowers: Flowers;
 }
 
-export interface Library {
+export interface Librarys {
   id: number;
   name: string;
   users: Users;
-  saveFlower: SaveFlower | undefined;
+  saveFlower: Array<SaveFlower> | undefined;
   createLibrary: string;
   updateLibrary: string;
 }
 
 export interface SaveFlower {
   id: number;
-  library: Array<Library> | undefined;
-  flowers: Array<Flowers> | undefined;
+  librarys: Librarys;
+  flowers: Flowers;
 }
 
 export interface FlowerType {
@@ -72,36 +70,69 @@ export interface Flowers {
   content: string;
   weather: string;
   hits: number;
-  type: FlowerType;
+  flowerType: FlowerType;
   images: Array<Images> | undefined;
-  saveFlower: SaveFlower | undefined;
+  saveFlower: Array<SaveFlower> | undefined;
   recent: Array<Recent> | undefined;
   createFlower: string;
   updateFlower: string;
 }
 
-export interface GetImageResponse {
+export interface GetRecentResponse {
   result: boolean;
   error: string | undefined;
-  image: Array<Images> | undefined;
+  recent: Array<Recent> | undefined;
 }
 
 export interface GetLibraryResponse {
   result: boolean;
   error: string | undefined;
-  library: Array<Library> | undefined;
+  librarys: Array<Librarys> | undefined;
 }
 
-export interface GetFlowerResponse {
+export interface GetSaveFlowerResponse {
   result: boolean;
   error: string | undefined;
-  flower: Array<Flowers> | undefined;
+  saveFlower: Array<SaveFlower> | undefined;
+}
+
+export interface GetSaveFlowerArgs {
+  libraryid: number;
+}
+
+export interface GetFlowerTypeResponse {
+  result: boolean;
+  error: string | undefined;
+  type: Array<FlowerType> | undefined;
+}
+
+export interface GetFlowersResponse {
+  result: boolean;
+  error: string | undefined;
+  flowers: Array<Flowers> | undefined;
+}
+
+export interface GetFlowersArgs {
+  typeid: number;
+}
+
+export interface GetCommentResponse {
+  result: boolean;
+  error: string | undefined;
+  comment: Array<Comment> | undefined;
+}
+
+export interface GetCommentArgs {
+  flowersid: number;
 }
 
 export interface Query {
-  GetImage: GetImageResponse;
+  GetRecent: GetRecentResponse;
   GetLibrary: GetLibraryResponse;
-  GetFlower: GetFlowerResponse;
+  GetSaveFlower: GetSaveFlowerResponse;
+  GetFlowerType: GetFlowerTypeResponse;
+  GetFlowers: GetFlowersResponse;
+  GetComment: GetCommentResponse;
 }
 
 export interface Mutation {
