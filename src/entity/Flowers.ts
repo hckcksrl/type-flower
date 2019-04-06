@@ -30,7 +30,7 @@ export class Flowers extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   content: string;
 
-  @Column({ type: "varchar", nullable: false, default: "spring" })
+  @Column({ type: "varchar", nullable: false })
   weather: string;
 
   @Column({ type: "integer", nullable: false, default: 0 })
@@ -39,28 +39,32 @@ export class Flowers extends BaseEntity {
   @ManyToOne(type => FlowerType, flowerType => flowerType.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: false
   })
   flowerType: FlowerType;
 
   @OneToMany(type => Images, images => images.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   images: Images[];
 
   @OneToMany(type => SaveFlower, saveFlower => saveFlower.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   saveFlower: SaveFlower[];
 
   @OneToMany(type => Recent, recent => recent.id, {
     cascade: true,
     onDelete: "CASCADE",
-    onUpdate: "CASCADE"
+    onUpdate: "CASCADE",
+    nullable: true
   })
   recent: Recent[];
 
