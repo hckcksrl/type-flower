@@ -3,5 +3,5 @@ type Comment {
   comment: String!
   users: Users!
   flowers: Flowers
-  incomment: Int
+  incomment: Comment
 }
