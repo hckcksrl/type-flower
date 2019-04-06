@@ -1,0 +1,9 @@
+type GetCommentResponse{
+  result : Boolean!
+  error : String
+  comment : [Comment]
+}
+
+type Query {
+  GetComment(flowersid : Int!) : GetCommentResponse
+}
