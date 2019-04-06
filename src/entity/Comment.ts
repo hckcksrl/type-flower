@@ -3,7 +3,8 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 import { Flowers } from "./Flowers";
 import { Images } from "./Image";
@@ -19,19 +20,22 @@ export class Comment extends BaseEntity {
 
   @ManyToOne(type => Users, users => users.id, {
     onDelete: "CASCADE",
-    cascade: true
+    cascade: true,
+    nullable: false
   })
   users: Users;
 
   @ManyToOne(type => Flowers, flowers => flowers.id, {
     onDelete: "CASCADE",
-    cascade: true
+    cascade: true,
+    nullable: true
   })
   flowers: Flowers;
 
-  @ManyToOne(type => Comment, incomment => incomment.id, {
+  @OneToMany(type => Comment, incomment => incomment.id, {
     onDelete: "CASCADE",
-    cascade: true
+    cascade: true,
+    nullable: true
   })
   incomment: Comment;
 }
