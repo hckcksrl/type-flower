@@ -1,0 +1,9 @@
+type GetSaveFlowerResponse {
+  result: Boolean!
+  error: String
+  saveFlower: [SaveFlower]
+}
+
+type Query {
+  GetSaveFlower(libraryid : Int!): GetSaveFlowerResponse
+}
