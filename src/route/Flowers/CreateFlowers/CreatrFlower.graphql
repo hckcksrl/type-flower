@@ -1,0 +1,8 @@
+type Mutation {
+  CreateFlower( input : FlowerInput ,typeid : Int!): CreateFlowerResponse
+}
+
+type CreateFlowerResponse{
+  result : Boolean!
+  error : String
+}
