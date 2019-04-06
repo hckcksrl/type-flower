@@ -11,7 +11,6 @@ const resolvers: Resolvers = {
       args: EditImageArgs,
       { req }
     ): Promise<EditImageResponse> => {
-      const user: Users = req;
       try {
         let image: Images = await Images.findOne({ id: args.id });
         if (image) {
