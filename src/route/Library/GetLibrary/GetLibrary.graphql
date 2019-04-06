@@ -1,0 +1,10 @@
+type GetLibraryResponse {
+  result: Boolean!
+  error: String
+  librarys: [Librarys]
+}
+
+
+type Query {
+  GetLibrary: GetLibraryResponse
+}
