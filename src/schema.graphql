@@ -9,6 +9,7 @@ type Recent {
 type Images {
   id : Int!
   image: String!
+  content : String
   createImage: String!
   updateImage: String!
   flowers: Flowers!
@@ -115,6 +116,12 @@ type GetCommentResponse{
   comment : [Comment]
 }
 
+type GetUsersResponse{
+  result : Boolean!
+  error : String
+  users : Users
+}
+
 type Query {
   GetRecent: GetRecentResponse
   GetLibrary: GetLibraryResponse
@@ -122,6 +129,7 @@ type Query {
   GetFlowerType : GetFlowerTypeResponse
   GetFlowers(typeid : Int!) : GetFlowersResponse
   GetComment(flowersid : Int!) : GetCommentResponse
+  GetUsers : GetUsersResponse
 }
 
 type Mutation {
