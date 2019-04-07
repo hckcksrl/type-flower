@@ -6,10 +6,11 @@ import {
 import { SaveFlower } from "../../../entity/SaveFlower";
 import { Librarys } from "../../../entity/Librarys";
 import { Flowers } from "../../../entity/Flowers";
+import { FlowerType } from "../../../entity/FlowerType";
 
 const resolvers: Resolvers = {
   SaveFlower: {
-    flowers: async ({ id }) => {
+    flowers: async ({ id }): Promise<Flowers> => {
       const saveFlower: SaveFlower = await SaveFlower.findOne(
         { id },
         { relations: ["flowers"] }
@@ -18,7 +19,7 @@ const resolvers: Resolvers = {
     }
   },
   Flowers: {
-    type: async ({ id }) => {
+    type: async ({ id }): Promise<FlowerType> => {
       const flowers: Flowers = await Flowers.findOne(
         { id: id },
         { relations: ["flowerType"] }

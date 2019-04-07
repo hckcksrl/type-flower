@@ -7,7 +7,7 @@ import { FlowerType } from "../../../entity/FlowerType";
 
 const resolvers: Resolvers = {
   Recent: {
-    flowers: async ({ id }) => {
+    flowers: async ({ id }): Promise<Flowers> => {
       const recent: Recent = await Recent.findOne(
         { id: id },
         { relations: ["flowers"] }
@@ -16,7 +16,7 @@ const resolvers: Resolvers = {
     }
   },
   Flowers: {
-    type: async ({ id }) => {
+    type: async ({ id }): Promise<FlowerType> => {
       const flowers: Flowers = await Flowers.findOne(
         { id: id },
         { relations: ["flowerType"] }
