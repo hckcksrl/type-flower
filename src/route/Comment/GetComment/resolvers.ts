@@ -15,9 +15,13 @@ const resolvers: Resolvers = {
     incomment: async ({ id }) => {
       const comment: Comment = await Comment.findOne({ id });
       const incomment: Array<Comment> = await Comment.find({
-        where: { incomment: comment }
+        parentComment: comment
       });
-      console.log(incomment);
+      if (incomment.length !== 0) {
+        return incomment;
+      } else {
+        return undefined;
+      }
     }
   },
 
