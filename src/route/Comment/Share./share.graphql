@@ -1,9 +1,0 @@
-type Comment {
-  id : Int!
-  comment: String!
-  users: Users!
-  flowers: Flowers
-  incomment: [Comment]
-  parentComment : Comment
-  likes: [Like]
-}
