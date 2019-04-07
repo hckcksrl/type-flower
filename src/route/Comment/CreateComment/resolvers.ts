@@ -43,7 +43,7 @@ const resolvers: Resolvers = {
             await Comment.create({
               comment: args.comment,
               users: user,
-              incomment: comment
+              parentComment: comment
             }).save();
             return {
               result: true,
