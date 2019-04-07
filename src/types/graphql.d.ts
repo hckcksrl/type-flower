@@ -30,7 +30,9 @@ export interface Comment {
   comment: string;
   users: Users;
   flowers: Flowers | undefined;
-  incomment: Comment | undefined;
+  incomment: Array<Comment> | undefined;
+  parentComment: Comment | undefined;
+  likes: Array<Like> | undefined;
 }
 
 export interface Images {
