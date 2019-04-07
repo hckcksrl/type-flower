@@ -40,7 +40,9 @@ type Comment {
   comment: String!
   users: Users!
   flowers: Flowers
-  incomment: Comment
+  incomment: [Comment]
+  parentComment : Comment
+  likes: [Like]
 }
 
 type Like {
