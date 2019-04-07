@@ -128,6 +128,12 @@ export interface GetCommentArgs {
   flowersid: number;
 }
 
+export interface GetUsersResponse {
+  result: boolean;
+  error: string | undefined;
+  users: Users | undefined;
+}
+
 export interface Query {
   GetRecent: GetRecentResponse;
   GetLibrary: GetLibraryResponse;
@@ -135,6 +141,7 @@ export interface Query {
   GetFlowerType: GetFlowerTypeResponse;
   GetFlowers: GetFlowersResponse;
   GetComment: GetCommentResponse;
+  GetUsers: GetUsersResponse;
 }
 
 export interface Mutation {
