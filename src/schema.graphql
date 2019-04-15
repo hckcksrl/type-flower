@@ -121,6 +121,13 @@ type GetUsersResponse{
   error : String
   users : Users
 }
+scalar Upload
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
 
 type Query {
   GetRecent: GetRecentResponse
@@ -130,6 +137,7 @@ type Query {
   GetFlowers(typeid : Int!) : GetFlowersResponse
   GetComment(flowersid : Int!) : GetCommentResponse
   GetUsers : GetUsersResponse
+   uploads: [File]
 }
 
 type Mutation {
@@ -155,7 +163,10 @@ type Mutation {
   CreateRecent(id : Int!) : CreateRecentResponse
   CreateSaveFlower(flowerid : Int! , libraryid : Int!) : CreateSaveFlowerResponse
   DeleteSaveFlower(id : Int!) : DeleteSaveFlowerResponse
+    singleUpload(file: Upload!): File!
 }
+
+
 
 type DeleteSaveFlowerResponse{
   result : Boolean!

@@ -5,6 +5,7 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import DecodeJwt from "./helper/decodejwt";
 import { Users } from "./entity/Users";
+var file = require("./route/File/upload/file");
 
 export class Apollo {
   public server: ApolloServer;
@@ -15,7 +16,8 @@ export class Apollo {
         return {
           req: req.body.user
         };
-      }
+      },
+      uploads: true
     });
   }
 }
@@ -31,6 +33,7 @@ export class App {
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(cors());
     this.express.use(this.jwt);
+    this.express.use("/file", file);
   };
   private jwt = async (
     req: express.Request,
