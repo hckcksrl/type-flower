@@ -1,41 +1,41 @@
-import { EmailLoginResponse, EmailLoginArgs } from "../../../types/graphql";
-import { Users } from "../../../entity/Users";
-import { Resolvers } from "../../../types/resolvers";
-import CreateJwt from "../../../helper/createjwt";
+// import { EmailLoginResponse, EmailLoginArgs } from "../../../types/graphql";
+// import { Users } from "../../../entity/Users";
+// import { Resolvers } from "../../../types/resolvers";
+// import CreateJwt from "../../../helper/createjwt";
 
-const resolvers: Resolvers = {
-  Mutation: {
-    EmailLogin: async (
-      _,
-      args: EmailLoginArgs
-    ): Promise<EmailLoginResponse> => {
-      const { email, password } = args;
-      try {
-        const user: Users = await Users.findOne({ email });
-        if (!user) {
-          return {
-            result: false,
-            error: "not exist",
-            token: undefined
-          };
-        }
-        if (password === user.password) {
-          const token: string = CreateJwt(user.email);
-          return {
-            result: true,
-            error: undefined,
-            token
-          };
-        }
-      } catch (error) {
-        return {
-          result: false,
-          error: error.message,
-          token: undefined
-        };
-      }
-    }
-  }
-};
+// const resolvers: Resolvers = {
+//   Mutation: {
+//     EmailLogin: async (
+//       _,
+//       args: EmailLoginArgs
+//     ): Promise<EmailLoginResponse> => {
+//       const { email, password } = args;
+//       try {
+//         const user: Users = await Users.findOne({ email });
+//         if (!user) {
+//           return {
+//             result: false,
+//             error: "not exist",
+//             token: undefined
+//           };
+//         }
+//         if (password === user.password) {
+//           const token: string = CreateJwt(user.email);
+//           return {
+//             result: true,
+//             error: undefined,
+//             token
+//           };
+//         }
+//       } catch (error) {
+//         return {
+//           result: false,
+//           error: error.message,
+//           token: undefined
+//         };
+//       }
+//     }
+//   }
+// };
 
-export default resolvers;
+// export default resolvers;

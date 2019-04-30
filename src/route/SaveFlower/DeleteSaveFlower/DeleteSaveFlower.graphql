@@ -1,5 +1,7 @@
 type Mutation {
     DeleteSaveFlower(id : Int!) : DeleteSaveFlowerResponse
+    DeleteSave(libraryid : Int!, flowerid:Int!) : DeleteSaveFlowerResponse
+
 }
 
 type DeleteSaveFlowerResponse{

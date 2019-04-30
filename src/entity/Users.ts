@@ -18,11 +18,11 @@ export class Users extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar", nullable: false, unique: true })
-  email: string;
+  @Column({ type: "integer", unique: true })
+  userid: number;
 
-  @Column({ type: "varchar", nullable: false })
-  password: string;
+  @Column({ type: "varchar", unique: true })
+  nickname: string;
 
   @OneToMany(type => Librarys, librarys => librarys.id, {
     cascade: true,

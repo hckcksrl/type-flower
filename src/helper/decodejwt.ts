@@ -3,10 +3,10 @@ import { Users } from "../entity/Users";
 
 const DecodeJwt = async (token: string): Promise<any> => {
   try {
-    const decode = jwt.verify(token, "1234" || "");
+    const decode = jwt.verify(token, "fkadsfjkjdhfkjsafakj" || "");
     const user: Users = await Users.findOne({
       where: {
-        email: decode.toString()
+        userid: parseInt(decode.toString())
       }
     });
     return user;

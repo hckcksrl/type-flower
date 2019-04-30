@@ -1,41 +1,31 @@
 import { Resolvers } from "../../../types/resolvers";
-import { GetFlowersResponse, GetFlowersArgs } from "../../../types/graphql";
-import { FlowerType } from "../../../entity/FlowerType";
+import { GetFlowerResponse, GetFlowerArgs } from "../../../types/graphql";
 import { Flowers } from "../../../entity/Flowers";
-import { Images } from "../../../entity/Image";
-
 const resolvers: Resolvers = {
-  Flowers: {
-    images: async ({ id }): Promise<Images[]> => {
-      const flowers: Flowers = await Flowers.findOne({ id: id });
-      const images: Array<Images> = await Images.find({ flowers: flowers });
-      if (images.length !== 0) {
-        return images;
-      } else {
-        return undefined;
-      }
-    }
-  },
   Query: {
-    GetFlowers: async (
-      _,
-      args: GetFlowersArgs
-    ): Promise<GetFlowersResponse> => {
+    GetFlower: async (_, args: GetFlowerArgs): Promise<GetFlowerResponse> => {
       try {
-        const type: FlowerType = await FlowerType.findOne({ id: args.typeid });
-        const flowers: Array<Flowers> = await Flowers.find({
-          where: { flowerType: type }
+        const flower: Flowers = await Flowers.findOne({
+          id: args.id
         });
-        return {
-          result: true,
-          error: undefined,
-          flowers
-        };
+        if (flower) {
+          return {
+            result: true,
+            error: undefined,
+            flower
+          };
+        } else {
+          return {
+            result: false,
+            error: "Flower Not Find",
+            flower: undefined
+          };
+        }
       } catch (error) {
         return {
           result: false,
           error: error.message,
-          flowers: undefined
+          flower: undefined
         };
       }
     }

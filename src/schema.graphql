@@ -44,6 +44,9 @@ type Comment {
   incomment: [Comment]
   parentComment : Comment
   likes: [Like]
+  createComment : String!
+  updateComment : String
+  incommentCount : Int
 }
 
 type Like {
@@ -70,8 +73,8 @@ type Flowers {
 
 type Users {
   id : Int!
-  email: String!
-  password: String!
+  userid : Int!
+  nickname : String!
   librarys: [Librarys]
   like: [Like]
   comment: [Comment]
@@ -121,13 +124,30 @@ type GetUsersResponse{
   error : String
   users : Users
 }
-scalar Upload
 
-type File {
-    filename: String!
-    mimetype: String!
-    encoding: String!
-  }
+type GetFlowerResponse{
+  result : Boolean!
+  error : String
+  flower : Flowers
+}
+
+type GetLikeResponse{
+  result : Boolean!
+  error : String
+  like_count : Int!
+}
+
+type GetInCommentResponse{
+  result : Boolean!
+  error :String
+  comment : Comment
+}
+
+type UserFindResponse{
+  result:Boolean!
+  error :String
+  token:String
+}
 
 type Query {
   GetRecent: GetRecentResponse
@@ -137,7 +157,10 @@ type Query {
   GetFlowers(typeid : Int!) : GetFlowersResponse
   GetComment(flowersid : Int!) : GetCommentResponse
   GetUsers : GetUsersResponse
-   uploads: [File]
+  GetFlower(id: Int!) : GetFlowerResponse
+  GetLike(flowerid:Int , commentid:Int) : GetLikeResponse
+  GetInComment(id:Int!) : GetInCommentResponse
+  UserFind(userid : Int!) : UserFindResponse
 }
 
 type Mutation {
@@ -163,10 +186,21 @@ type Mutation {
   CreateRecent(id : Int!) : CreateRecentResponse
   CreateSaveFlower(flowerid : Int! , libraryid : Int!) : CreateSaveFlowerResponse
   DeleteSaveFlower(id : Int!) : DeleteSaveFlowerResponse
-    singleUpload(file: Upload!): File!
+      DeleteSave(libraryid : Int!, flowerid:Int!) : DeleteSaveFlowerResponse
+      Logins(userid: Int! , nickname:String) : LoginResponse
+Logout :LogoutResponse
 }
 
+type LogoutResponse{
+  result : Boolean!
+  error :String
+}
 
+type LoginResponse{
+  result : Boolean!
+  error : String
+  token : String
+}
 
 type DeleteSaveFlowerResponse{
   result : Boolean!

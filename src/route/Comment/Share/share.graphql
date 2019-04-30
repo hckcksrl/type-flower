@@ -6,4 +6,7 @@ type Comment {
   incomment: [Comment]
   parentComment : Comment
   likes: [Like]
+  createComment : String!
+  updateComment : String
+  incommentCount : Int
 }

@@ -8,8 +8,14 @@ import { Flowers } from "../../../entity/Flowers";
 const resolvers: Resolvers = {
   Mutation: {
     Like: async (_, args: LikeArgs, { req }): Promise<LikeResponse> => {
-      const user: Users = req;
       try {
+        const user: Users = req;
+        if (!user) {
+          return {
+            result: false,
+            error: "user Not Login"
+          };
+        }
         if (args.commentid) {
           const comment: Comment = await Comment.findOne({
             id: args.commentid
@@ -26,7 +32,10 @@ const resolvers: Resolvers = {
                 error: undefined
               };
             } else {
-              await Likes.create({ comment: comment, users: user }).save();
+              await Likes.create({
+                comment: comment,
+                users: user
+              }).save();
               return {
                 result: true,
                 error: undefined

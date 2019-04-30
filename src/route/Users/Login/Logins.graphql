@@ -1,0 +1,9 @@
+type Mutation{
+    Logins(userid:Int! , nickname:String) : LoginResponse
+}
+
+type LoginResponse{
+  result : Boolean!
+  error :String
+  token : String
+}

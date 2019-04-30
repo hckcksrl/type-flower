@@ -16,6 +16,15 @@ const resolvers: Resolvers = {
         { relations: ["flowers"] }
       );
       return saveFlower.flowers;
+    },
+    librarys: async ({ id }): Promise<Librarys> => {
+      const saveFlower: SaveFlower = await SaveFlower.findOne(
+        {
+          id: id
+        },
+        { relations: ["librarys"] }
+      );
+      return saveFlower.librarys;
     }
   },
   Flowers: {

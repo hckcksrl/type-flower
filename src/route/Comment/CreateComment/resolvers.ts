@@ -17,44 +17,42 @@ const resolvers: Resolvers = {
     ): Promise<CreateCommentResponse> => {
       const user: Users = req;
       try {
-        if (args.flowerid) {
+        if (args.flowerid && !args.commentid) {
           const flower: Flowers = await Flowers.findOne({ id: args.flowerid });
-          if (flower) {
-            await Comment.create({
-              comment: args.comment,
-              users: user,
-              flowers: flower
-            }).save();
-            return {
-              result: true,
-              error: undefined
-            };
-          } else {
+          if (!flower) {
             return {
               result: false,
               error: "flower not exist"
             };
           }
-        } else if (args.commentid) {
+          await Comment.create({
+            comment: args.comment,
+            users: user,
+            flowers: flower
+          }).save();
+          return {
+            result: true,
+            error: undefined
+          };
+        } else if (args.commentid && !args.flowerid) {
           const comment: Comment = await Comment.findOne({
             id: args.commentid
           });
-          if (comment) {
-            await Comment.create({
-              comment: args.comment,
-              users: user,
-              parentComment: comment
-            }).save();
-            return {
-              result: true,
-              error: undefined
-            };
-          } else {
+          if (!comment) {
             return {
               result: false,
               error: "comment not exist"
             };
           }
+          await Comment.create({
+            comment: args.comment,
+            users: user,
+            parentComment: comment
+          }).save();
+          return {
+            result: true,
+            error: undefined
+          };
         } else {
           return {
             result: false,

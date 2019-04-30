@@ -1,7 +1,7 @@
 export interface Users {
   id: number;
-  email: string;
-  password: string;
+  userid: number;
+  nickname: string;
   librarys: Array<Librarys> | undefined;
   like: Array<Like> | undefined;
   comment: Array<Comment> | undefined;
@@ -33,6 +33,8 @@ export interface Comment {
   incomment: Array<Comment> | undefined;
   parentComment: Comment | undefined;
   likes: Array<Like> | undefined;
+  createComment: string;
+  updateComment: string | undefined;
 }
 
 export interface Images {
@@ -134,6 +136,47 @@ export interface GetUsersResponse {
   users: Users | undefined;
 }
 
+export interface GetFlowerResponse {
+  result: boolean;
+  error: string | undefined;
+  flower: Flowers | undefined;
+}
+
+export interface GetFlowerArgs {
+  id: number;
+}
+
+export interface GetLikeArgs {
+  flowerid: number | undefined;
+  commentid: number | undefined;
+}
+
+export interface GetLikeResponse {
+  result: boolean;
+  error: string | undefined;
+  like_count: number;
+}
+
+export interface GetInCommentResponse {
+  result: boolean;
+  error: string | undefined;
+  comment: Comment | undefined;
+}
+
+export interface GetInCommentArgs {
+  id: number;
+}
+
+export interface UserFindArgs {
+  userid: number;
+}
+
+export interface UserFindResponse {
+  result: boolean;
+  error: string | undefined;
+  token: string | undefined;
+}
+
 export interface Query {
   GetRecent: GetRecentResponse;
   GetLibrary: GetLibraryResponse;
@@ -142,6 +185,10 @@ export interface Query {
   GetFlowers: GetFlowersResponse;
   GetComment: GetCommentResponse;
   GetUsers: GetUsersResponse;
+  GetFlower: GetFlowerResponse;
+  GetLike: GetLikeResponse;
+  GetInComment: GetInCommentResponse;
+  UserFind: UserFindResponse;
 }
 
 export interface Mutation {
@@ -176,6 +223,24 @@ export interface Mutation {
 
   CreateSaveFlower: CreateSaveFlowerResponse;
   DeleteSaveFlower: DeleteSaveFlowerResponse;
+  DeleteSave: DeleteSaveFlowerResponse;
+  Logins: LoginsResponse;
+  Logout: LogoutResponse;
+}
+
+export interface LogoutResponse {
+  result: boolean;
+}
+
+export interface LoginsResponse {
+  result: boolean;
+  error: string | undefined;
+  token: string | undefined;
+}
+
+export interface LoginsArgs {
+  userid: number;
+  nickname: string;
 }
 
 export interface DeleteSaveFlowerResponse {
@@ -396,8 +461,15 @@ export interface CreateRecentArgs {
 export interface CreateSaveFlowerArgs {
   flowerid: number;
   libraryid: number;
+  // createLibraryid: Array<number> | undefined;
+  // deleteLibraryid: Array<number> | undefined;
 }
 
 export interface DeleteSaveFlowerArgs {
   id: number;
+}
+
+export interface DeleteSaveArgs {
+  flowerid: number;
+  libraryid: number;
 }

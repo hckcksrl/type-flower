@@ -1,0 +1,10 @@
+
+type GetFlowerResponse{
+  result : Boolean!
+  error : String
+  flower : Flowers
+}
+
+type Query {
+    GetFlower(id: Int!) : GetFlowerResponse
+}

@@ -1,7 +1,7 @@
 type Users {
   id : Int!
-  email: String!
-  password: String!
+  userid : Int!
+  nickname : String!
   librarys: [Librarys]
   like: [Like]
   comment: [Comment]

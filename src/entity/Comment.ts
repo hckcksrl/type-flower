@@ -4,7 +4,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+  RelationCount,
+  JoinColumn
 } from "typeorm";
 import { Flowers } from "./Flowers";
 import { Images } from "./Image";
@@ -41,6 +45,7 @@ export class Comment extends BaseEntity {
     cascade: true,
     nullable: true
   })
+  @JoinColumn({ name: "parentCommentId" })
   incomment: Comment[];
 
   @ManyToOne(type => Comment, parentcomment => parentcomment.id, {
@@ -57,4 +62,10 @@ export class Comment extends BaseEntity {
     nullable: true
   })
   likes: Likes[];
+
+  @CreateDateColumn()
+  createComment: string;
+
+  @UpdateDateColumn()
+  updateComment: string;
 }

@@ -1,0 +1,9 @@
+type GetInCommentResponse{
+  result : Boolean!
+  error :String
+  comment : Comment
+}
+
+type Query {
+  GetInComment(id:Int!) : GetInCommentResponse
+}

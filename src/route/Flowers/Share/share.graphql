@@ -19,3 +19,4 @@ input FlowerInput{
   content: String!
   weather: String!
 }
+

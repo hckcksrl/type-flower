@@ -8,13 +8,16 @@ import {
   UpdateDateColumn,
   ManyToOne,
   OneToMany,
-  JoinTable
+  JoinTable,
+  RelationCount
 } from "typeorm";
 
 import { Images } from "./Image";
 import { FlowerType } from "./FlowerType";
 import { SaveFlower } from "./SaveFlower";
 import { Recent } from "./Recent";
+import { Likes } from "./Likes";
+import { Collection } from "./Collection";
 
 @Entity({ name: "flowers" })
 export class Flowers extends BaseEntity {
@@ -67,6 +70,28 @@ export class Flowers extends BaseEntity {
     nullable: true
   })
   recent: Recent[];
+
+  @OneToMany(type => Likes, likes => likes.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+    nullable: true
+  })
+  likes: Likes[];
+
+  @ManyToOne(type => Collection, collection => collection.id, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  })
+  collection: Collection;
+  // @RelationCount((flowers: Flowers) => flowers.likes)
+  // imageCount: number;
+
+  // @RelationCount((flowers: Flowers) => flowers.likes, "removeLikes", qb =>
+  //   qb.andWhere("removeLikes.isRemoved = :isRemoved", { isRemoved: true })
+  // )
+  // removedImageCount: number;
 
   @CreateDateColumn()
   createFlower: string;

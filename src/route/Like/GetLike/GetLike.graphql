@@ -1,0 +1,9 @@
+type GetLikeResponse{
+  result : Boolean!
+  error : String
+  like_count: Int!
+}
+
+type Query {
+  GetLike(flowerid:Int , commentid:Int) : GetLikeResponse
+}

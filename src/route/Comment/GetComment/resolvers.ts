@@ -3,6 +3,7 @@ import { GetCommentResponse, GetCommentArgs } from "../../../types/graphql";
 import { Flowers } from "../../../entity/Flowers";
 import { Comment } from "../../../entity/Comment";
 import { Users } from "../../../entity/Users";
+import { Likes } from "../../../entity/Likes";
 
 const resolvers: Resolvers = {
   Comment: {
@@ -16,20 +17,31 @@ const resolvers: Resolvers = {
     incomment: async ({ id }): Promise<Comment[]> => {
       const comment: Comment = await Comment.findOne({ id });
       const incomment: Array<Comment> = await Comment.find({
-        parentComment: comment
+        where: { parentComment: comment },
+        relations: ["users"],
+        order: { id: "DESC" }
       });
       if (incomment.length !== 0) {
         return incomment;
       } else {
-        return undefined;
+        return null;
       }
     }
   },
-
+  Like: {
+    users: async ({ id }): Promise<Users> => {
+      const likes: Likes = await Likes.findOne(
+        { id: id },
+        { relations: ["users"] }
+      );
+      return likes.users;
+    }
+  },
   Query: {
     GetComment: async (
       _,
-      args: GetCommentArgs
+      args: GetCommentArgs,
+      { req }
     ): Promise<GetCommentResponse> => {
       try {
         const flowers: Flowers = await Flowers.findOne({ id: args.flowersid });
@@ -37,6 +49,7 @@ const resolvers: Resolvers = {
           where: {
             flowers: flowers
           },
+          order: { id: "DESC" },
           relations: ["users"]
         });
         return {

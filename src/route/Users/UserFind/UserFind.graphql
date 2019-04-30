@@ -1,0 +1,8 @@
+type UserFindResponse{
+  result:Boolean!
+  error :String
+  token:String
+}
+type Query {
+  UserFind(userid : Int!) : UserFindResponse
+}
