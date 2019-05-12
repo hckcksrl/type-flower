@@ -7,10 +7,11 @@ import { Flowers } from "../../../entity/Flowers";
 
 const resolvers: Resolvers = {
   Librarys: {
-    saveFlower: async ({ id }): Promise<Flowers> => {
+    saveFlower: async ({ id }): Promise<SaveFlower[]> => {
       const library: Librarys = await Librarys.findOne({ id: id });
       const saveFlower: Array<SaveFlower> = await SaveFlower.find({
-        where: { librarys: library }
+        where: { librarys: library },
+        order: { id: "DESC" }
       });
       return saveFlower;
     }
@@ -21,7 +22,8 @@ const resolvers: Resolvers = {
       const user: Users = req;
       try {
         const librarys: Array<Librarys> = await Librarys.find({
-          where: { users: user }
+          where: { users: user },
+          order: { updateLibrary: "DESC" }
         });
         if (librarys) {
           return {

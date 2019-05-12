@@ -1,0 +1,7 @@
+type Questions  {
+  id: Int!
+  question: String!
+  users: Users!
+  createQuestion:String!
+  updateQuestion:String!
+}

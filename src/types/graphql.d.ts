@@ -10,6 +10,13 @@ export interface Users {
   updateUser: string;
 }
 
+export interface Collection {
+  id: number;
+  name: string;
+  flowers: Array<Flowers> | undefined;
+  view: boolean;
+}
+
 export interface Recent {
   id: number;
   users: Users;
@@ -72,7 +79,6 @@ export interface Flowers {
   image: string;
   name: string;
   content: string;
-  weather: string;
   hits: number;
   flowerType: FlowerType;
   images: Array<Images> | undefined;
@@ -80,6 +86,14 @@ export interface Flowers {
   recent: Array<Recent> | undefined;
   createFlower: string;
   updateFlower: string;
+}
+
+export interface Questions {
+  id: number;
+  question: string;
+  users: Users;
+  createQuestion: string;
+  updateQuestion: string;
 }
 
 export interface GetRecentResponse {
@@ -133,7 +147,7 @@ export interface GetCommentArgs {
 export interface GetUsersResponse {
   result: boolean;
   error: string | undefined;
-  users: Users | undefined;
+  nickname: string;
 }
 
 export interface GetFlowerResponse {
@@ -161,6 +175,7 @@ export interface GetInCommentResponse {
   result: boolean;
   error: string | undefined;
   comment: Comment | undefined;
+  mine: boolean;
 }
 
 export interface GetInCommentArgs {
@@ -177,6 +192,24 @@ export interface UserFindResponse {
   token: string | undefined;
 }
 
+export interface GetUserLikeResponse {
+  result: boolean;
+  error: string | undefined;
+  likes: Array<Like> | undefined;
+}
+
+export interface GetQuestionsResponse {
+  result: boolean;
+  error: string | undefined;
+  questions: Array<Questions> | undefined;
+}
+
+export interface GetCollectionResponse {
+  result: boolean;
+  error: string | undefined;
+  collection: Array<Collection> | undefined;
+}
+
 export interface Query {
   GetRecent: GetRecentResponse;
   GetLibrary: GetLibraryResponse;
@@ -189,12 +222,12 @@ export interface Query {
   GetLike: GetLikeResponse;
   GetInComment: GetInCommentResponse;
   UserFind: UserFindResponse;
+  GetUserLike: GetUserLikeResponse;
+  GetQuestions: GetQuestionsResponse;
+  GetCollection: GetCollectionResponse;
 }
 
 export interface Mutation {
-  EmailLogin: EmailLoginResponse;
-  EmailRegist: EmailRegistResonse;
-
   CreateImage: CreateImageResponse;
   DeleteImage: DeleteImageResponse;
   EditImage: EditImageResponse;
@@ -225,17 +258,44 @@ export interface Mutation {
   DeleteSaveFlower: DeleteSaveFlowerResponse;
   DeleteSave: DeleteSaveFlowerResponse;
   Logins: LoginsResponse;
-  Logout: LogoutResponse;
+  EditProfile: EditProfileResponse;
+  CreateQuestions: CreateQuestionsResponse;
+  CreateCollection: CreateCollectionResponse;
+  EditCollection: EditCollectionResponse;
+  ViewCollection: ViewCollectionResponse;
 }
 
-export interface LogoutResponse {
+export interface ViewCollectionResponse {
   result: boolean;
+  error: string | undefined;
+}
+
+export interface EditCollectionResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface CreateCollectionResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface CreateQuestionsResponse {
+  result: boolean;
+  error: string | undefined;
+}
+
+export interface EditProfileResponse {
+  result: boolean;
+  error: string | undefined;
+  nickname: string;
 }
 
 export interface LoginsResponse {
   result: boolean;
   error: string | undefined;
   token: string | undefined;
+  nickname: string;
 }
 
 export interface LoginsArgs {
@@ -323,18 +383,6 @@ export interface UpHitFlowerResponse {
   error: string | undefined;
 }
 
-export interface EmailLoginResponse {
-  result: boolean;
-  error: string | undefined;
-  token: string | undefined;
-}
-
-export interface EmailRegistResonse {
-  result: boolean;
-  error: string | undefined;
-  token: string | undefined;
-}
-
 export interface CreateImageResponse {
   result: boolean;
   error: string | undefined;
@@ -353,16 +401,6 @@ export interface CreateLibraryResponse {
 export interface CreateFlowerResponse {
   result: boolean;
   error: string | undefined;
-}
-
-export interface EmailLoginArgs {
-  email: string;
-  password: string;
-}
-
-export interface EmailRegistArgs {
-  email: string;
-  password: string;
 }
 
 export interface CreateImageArgs {
@@ -388,7 +426,6 @@ export interface InputFlowers {
   image: string;
   name: string;
   content: string;
-  weather: string;
 }
 
 export interface UpHitFlowerArgs {
@@ -472,4 +509,25 @@ export interface DeleteSaveFlowerArgs {
 export interface DeleteSaveArgs {
   flowerid: number;
   libraryid: number;
+}
+
+export interface EditProfileArgs {
+  nickname: string;
+}
+
+export interface CreateQuestionsArgs {
+  question: string;
+}
+
+export interface CreateCollectionArgs {
+  name: string;
+}
+
+export interface EditCollectionArgs {
+  id: number;
+  flowersid: Array<number>;
+}
+
+export interface ViewCollectionArgs {
+  id: Array<number> | undefined;
 }

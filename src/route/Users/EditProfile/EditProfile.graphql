@@ -1,0 +1,9 @@
+type Mutation{
+    EditProfile(nickname : String!) : EditProfileResponse
+}
+
+type EditProfileResponse{
+    result :Boolean!
+    error : String
+    nickname: String!
+}

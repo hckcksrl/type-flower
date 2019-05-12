@@ -9,7 +9,7 @@ const resolvers: Resolvers = {
       return {
         result: true,
         error: undefined,
-        users: user
+        nickname: user.nickname
       };
     }
   }

@@ -1,7 +1,7 @@
 type GetUsersResponse{
   result : Boolean!
   error : String
-  users : Users
+  nickname : String!
 }
 
 type Query {

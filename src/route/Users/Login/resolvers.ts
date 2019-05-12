@@ -15,7 +15,8 @@ const resolvers: Resolvers = {
           return {
             result: true,
             error: undefined,
-            token
+            token,
+            nickname: user.nickname
           };
         } else {
           const CreateUser: Users = await Users.create({
@@ -26,14 +27,16 @@ const resolvers: Resolvers = {
           return {
             result: true,
             error: undefined,
-            token
+            token,
+            nickname: CreateUser.nickname
           };
         }
       } catch (error) {
         return {
           result: false,
           error: error.message,
-          token: undefined
+          token: undefined,
+          nickname: ""
         };
       }
     }

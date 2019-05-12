@@ -1,9 +1,0 @@
-type Mutation {
-  EmailRegist(email : String! , password : String!): EmailRegistResonse
-}
-
-type EmailRegistResonse {
-  result: Boolean!
-  error: String
-  token: String
-}

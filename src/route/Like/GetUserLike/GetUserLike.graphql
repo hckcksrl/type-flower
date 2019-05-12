@@ -1,0 +1,9 @@
+type Query{
+    GetUserLike : GetUserLikeResponse
+}
+
+type GetUserLikeResponse{
+    result : Boolean!
+    error : String
+    likes : [Like]
+}

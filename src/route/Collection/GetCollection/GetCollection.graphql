@@ -1,0 +1,9 @@
+type Query{
+    GetCollection : GetCollectionResponse
+}
+
+type GetCollectionResponse{
+    result : Boolean!
+    error : String
+    collection :[Collection]
+}

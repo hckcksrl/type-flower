@@ -3,7 +3,6 @@ type Flowers {
   image: String!
   name: String!
   content: String!
-  weather: String!
   hits: Int!
   type: FlowerType!
   images: [Images]
@@ -17,6 +16,5 @@ input FlowerInput{
   image: String!
   name: String!
   content: String!
-  weather: String!
 }
 

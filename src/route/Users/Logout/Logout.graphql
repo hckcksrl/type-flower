@@ -1,8 +1,0 @@
-type Mutation{
-    Logout :LogoutResponse
-}
-
-type LogoutResponse{
-  result : Boolean!
-  error :String
-}

@@ -6,4 +6,5 @@ type LoginResponse{
   result : Boolean!
   error :String
   token : String
+  nickname : String!
 }

@@ -1,0 +1,8 @@
+type Mutation{
+    ViewCollection(id:[Int]) : ViewCollectionResponse
+}
+
+type ViewCollectionResponse{
+    result : Boolean!
+    error : String
+}

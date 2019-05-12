@@ -24,7 +24,6 @@ const resolvers: Resolvers = {
           flower.content = args.input.content;
           flower.name = args.input.name;
           flower.image = args.input.image;
-          flower.weather = args.input.weather;
           flower.save();
           return {
             result: true,

@@ -12,6 +12,7 @@ import { Librarys } from "./Librarys";
 import { Likes } from "./Likes";
 import { Comment } from "./Comment";
 import { Recent } from "./Recent";
+import { Questions } from "./Question";
 
 @Entity({ name: "users" })
 export class Users extends BaseEntity {
@@ -55,6 +56,13 @@ export class Users extends BaseEntity {
     nullable: true
   })
   recent: Recent[];
+
+  @OneToMany(type => Questions, questions => questions.id, {
+    cascade: true,
+    onUpdate: "CASCADE",
+    nullable: true
+  })
+  questions: Questions[];
 
   @CreateDateColumn()
   createUser: string;

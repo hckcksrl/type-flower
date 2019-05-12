@@ -6,6 +6,13 @@ type Recent {
   updateRecent : String!
 }
 
+type Collection  {
+  id: Int!
+  name: String!
+  flowers: [Flowers]
+  view: Boolean!
+}
+
 type Images {
   id : Int!
   image: String!
@@ -61,7 +68,6 @@ type Flowers {
   image: String!
   name: String!
   content: String!
-  weather: String!
   hits: Int!
   type: FlowerType!
   images: [Images]
@@ -79,9 +85,20 @@ type Users {
   like: [Like]
   comment: [Comment]
   recent : [Recent]
+  questions: [Questions]
   createUser: String!
   updateUser: String!
 }
+
+type Questions  {
+  id: Int!
+  question: String!
+  users: Users!
+  createQuestion:String!
+  updateQuestion:String!
+}
+
+
 
 type GetRecentResponse {
   result: Boolean!
@@ -122,7 +139,7 @@ type GetCommentResponse{
 type GetUsersResponse{
   result : Boolean!
   error : String
-  users : Users
+  nickname : String!
 }
 
 type GetFlowerResponse{
@@ -141,6 +158,7 @@ type GetInCommentResponse{
   result : Boolean!
   error :String
   comment : Comment
+  mine : Boolean!
 }
 
 type UserFindResponse{
@@ -148,6 +166,24 @@ type UserFindResponse{
   error :String
   token:String
 }
+
+type GetUserLikeResponse{
+    result : Boolean!
+    error : String
+    likes : [Like]
+}
+
+type GetQuestionsResponse{
+    result : Boolean!
+    error : String
+    questions : [Questions]
+}
+type GetCollectionResponse{
+    result : Boolean!
+    error : String
+    collection :[Collection]
+}
+
 
 type Query {
   GetRecent: GetRecentResponse
@@ -161,11 +197,13 @@ type Query {
   GetLike(flowerid:Int , commentid:Int) : GetLikeResponse
   GetInComment(id:Int!) : GetInCommentResponse
   UserFind(userid : Int!) : UserFindResponse
+    GetUserLike : GetUserLikeResponse
+    GetQuestions : GetQuestionsResponse
+    GetCollection : GetCollectionResponse
+
 }
 
 type Mutation {
-  EmailLogin(email: String! , password : String!): EmailLoginResponse
-  EmailRegist(email : String! , password : String!): EmailRegistResonse
   CreateImage(image : String! ,content : String , flowerid : Int!): CreateImageResponse
   DeleteImage(id : Int! ): DeleteImageResponse
   EditImage(id : Int! ,image: String!, content : String, flowerid : Int) : EditImageResponse
@@ -186,20 +224,47 @@ type Mutation {
   CreateRecent(id : Int!) : CreateRecentResponse
   CreateSaveFlower(flowerid : Int! , libraryid : Int!) : CreateSaveFlowerResponse
   DeleteSaveFlower(id : Int!) : DeleteSaveFlowerResponse
-      DeleteSave(libraryid : Int!, flowerid:Int!) : DeleteSaveFlowerResponse
-      Logins(userid: Int! , nickname:String) : LoginResponse
-Logout :LogoutResponse
+  DeleteSave(libraryid : Int!, flowerid:Int!) : DeleteSaveFlowerResponse
+  Logins(userid: Int! , nickname:String) : LoginResponse
+  EditProfile(nickname:String!) : EditProfileResponse
+  CreateQuestions(question : String!) : CreateQuestionsResponse
+  CreateCollection(name : String!) : CreateCollectionResponse
+    EditCollection(id:Int! , flowersid:[Int]!) : EditCollectionResponse
+    ViewCollection(id:[Int]) : ViewCollectionResponse
 }
 
-type LogoutResponse{
+type ViewCollectionResponse{
+    result : Boolean!
+    error : String
+}
+
+type EditCollectionResponse{
+    result : Boolean!
+    error : String
+}
+
+type CreateCollectionResponse{
+    result:Boolean!
+    error :String
+}
+type CreateQuestionsResponse{
+    result : Boolean!
+    error : String
+}
+
+type EditProfileResponse{
   result : Boolean!
-  error :String
+  error : String
+  nickname: String!
+
 }
 
 type LoginResponse{
   result : Boolean!
   error : String
   token : String
+  nickname : String!
+
 }
 
 type DeleteSaveFlowerResponse{
@@ -282,18 +347,6 @@ type UpHitFlowereResponse{
   error : String
 }
 
-type EmailLoginResponse {
-  result: Boolean!
-  error: String
-  token: String
-}
-
-type EmailRegistResonse {
-  result: Boolean!
-  error: String
-  token: String
-}
-
 type CreateImageResponse {
   result: Boolean!
   error: String
@@ -319,5 +372,4 @@ input FlowerInput{
   image: String!
   name: String!
   content: String!
-  weather: String!
 }

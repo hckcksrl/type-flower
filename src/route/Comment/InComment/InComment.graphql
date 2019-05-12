@@ -2,6 +2,7 @@ type GetInCommentResponse{
   result : Boolean!
   error :String
   comment : Comment
+  mine : Boolean!
 }
 
 type Query {

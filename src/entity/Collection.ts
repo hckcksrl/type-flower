@@ -3,7 +3,8 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany
+  ManyToMany,
+  JoinTable
 } from "typeorm";
 import { Flowers } from "./Flowers";
 
@@ -15,13 +16,14 @@ export class Collection extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   name: string;
 
-  @OneToMany(type => Flowers, flowers => flowers.id, {
+  @ManyToMany(type => Flowers, flowers => flowers.id, {
     cascade: true,
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
   })
+  @JoinTable()
   flowers: Flowers[];
 
-  @Column({ type: "boolean", default: false })
+  @Column({ type: "boolean", default: false, nullable: false })
   view: boolean;
 }

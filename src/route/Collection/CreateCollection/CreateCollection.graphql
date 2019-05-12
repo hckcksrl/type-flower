@@ -1,0 +1,8 @@
+type Mutation {
+    CreateCollection(name : String!) : CreateCollectionResponse
+}
+
+type CreateCollectionResponse{
+    result:Boolean!
+    error :String
+}

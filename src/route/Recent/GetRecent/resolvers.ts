@@ -6,15 +6,6 @@ import { Flowers } from "../../../entity/Flowers";
 import { FlowerType } from "../../../entity/FlowerType";
 
 const resolvers: Resolvers = {
-  Recent: {
-    flowers: async ({ id }): Promise<Flowers> => {
-      const recent: Recent = await Recent.findOne(
-        { id: id },
-        { relations: ["flowers"] }
-      );
-      return recent.flowers;
-    }
-  },
   Flowers: {
     type: async ({ id }): Promise<FlowerType> => {
       const flowers: Flowers = await Flowers.findOne(
@@ -30,7 +21,8 @@ const resolvers: Resolvers = {
       try {
         const recent: Array<Recent> = await Recent.find({
           where: { users: user },
-          order: { createRecent: "ASC" }
+          order: { updateRecent: "DESC" },
+          relations: ["flowers"]
         });
         if (recent) {
           return {

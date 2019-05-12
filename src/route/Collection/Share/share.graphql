@@ -1,0 +1,6 @@
+type Collection  {
+  id: Int!
+  name: String!
+  flowers: [Flowers]
+  view: Boolean!
+}

@@ -33,6 +33,8 @@ const resolvers: Resolvers = {
               flowers: flower,
               librarys: library
             }).save();
+            await Librarys.update({ id: library.id }, {});
+
             return {
               result: true,
               error: undefined

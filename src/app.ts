@@ -40,15 +40,21 @@ export class App {
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> => {
-    const token: string = req.headers.authorization.split(" ")[1];
-    if (token !== "null") {
-      const user: Users = await DecodeJwt(token);
-      if (user) {
-        req.body.user = user;
-      } else {
-        req.body.user = undefined;
+    const token: string = req.headers.authorization;
+    if (token === undefined) {
+      next();
+    } else {
+      const jwt = token.split(" ")[1];
+      token.split(" ")[1];
+      if (jwt !== "null") {
+        const user: Users = await DecodeJwt(jwt);
+        if (user) {
+          req.body.user = user;
+        } else {
+          req.body.user = undefined;
+        }
       }
+      next();
     }
-    next();
   };
 }

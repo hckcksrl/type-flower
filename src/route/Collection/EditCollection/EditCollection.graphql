@@ -1,0 +1,8 @@
+type Mutation{
+    EditCollection(id:Int! , flowersid:[Int]!) : EditCollectionResponse
+}
+
+type EditCollectionResponse{
+    result : Boolean!
+    error : String
+}

@@ -52,6 +52,7 @@ const resolvers: Resolvers = {
         });
         if (save) {
           save.remove();
+          await Librarys.update({ id: library.id }, {});
           return {
             result: true,
             error: undefined

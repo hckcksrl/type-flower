@@ -33,9 +33,6 @@ export class Flowers extends BaseEntity {
   @Column({ type: "varchar", nullable: false })
   content: string;
 
-  @Column({ type: "varchar", nullable: false })
-  weather: string;
-
   @Column({ type: "integer", nullable: false, default: 0 })
   hits: number;
 
@@ -79,12 +76,12 @@ export class Flowers extends BaseEntity {
   })
   likes: Likes[];
 
-  @ManyToOne(type => Collection, collection => collection.id, {
+  @ManyToMany(type => Collection, collection => collection.id, {
     cascade: true,
     onDelete: "CASCADE",
     onUpdate: "CASCADE"
   })
-  collection: Collection;
+  collection: Collection[];
   // @RelationCount((flowers: Flowers) => flowers.likes)
   // imageCount: number;
 

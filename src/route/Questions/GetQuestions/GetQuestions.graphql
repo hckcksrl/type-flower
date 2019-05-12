@@ -1,0 +1,9 @@
+type Query {
+    GetQuestions : GetQuestionsResponse
+}
+
+type GetQuestionsResponse{
+    result : Boolean!
+    error : String
+    questions : [Questions]
+}
