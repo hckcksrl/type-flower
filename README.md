@@ -6,4 +6,3 @@
 * Graphql
 * Apollo-Server
 * AWS-S3
-
