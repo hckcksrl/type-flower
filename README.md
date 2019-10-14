@@ -1,9 +1,9 @@
-# Awesome Project Build with TypeORM
+# Flower Server
 
-Steps to run this project:
+### Stack
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+* Node
+* Graphql
+* Apollo-Server
+* AWS-S3
 
-file upload
