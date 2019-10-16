@@ -10,13 +10,10 @@
 
 # 로그인 전
 
-[![Video Label](https://youtu.be/t2aM6Za5k8g)](https://youtu.be/t2aM6Za5k8g)
-
-
-[![Watch the video]](https://youtu.be/t2aM6Za5k8g)
+https://youtu.be/t2aM6Za5k8g
 
 
 
 # 로그인 후 
 
-[![Watch the video]](https://youtu.be/C5jrrZ-R1Dc)
+https://youtu.be/C5jrrZ-R1Dc
