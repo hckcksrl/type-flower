@@ -26,10 +26,10 @@ const flowerUpload = multer({
     s3,
     bucket: "horang-flower",
     acl: "public-read",
-    metadata: function(req, file, cb) {
+    metadata: function (req, file, cb) {
       cb(null, { fieldName: "TESTING_META_DATA!" });
     },
-    key: function(req, file, cb) {
+    key: function (req, file, cb) {
       cb(null, Date.now().toString() + file.originalname);
     }
   })
@@ -44,7 +44,7 @@ router.post(
     const flower_type = await FlowerType.findOne({ name: req.body.type });
     const image = `https://s3.ap-northeast-2.amazonaws.com/${req.file.bucket}/${
       req.file.key
-    }`;
+      }`;
     const input = {
       image: image,
       name: req.body.name,
@@ -69,10 +69,10 @@ const imageUpload = multer({
     s3,
     bucket: "horang-image",
     acl: "public-read",
-    metadata: function(req, file, cb) {
+    metadata: function (req, file, cb) {
       cb(null, { fieldName: "TESTING_META_DATA!" });
     },
-    key: function(req, file, cb) {
+    key: function (req, file, cb) {
       cb(null, Date.now().toString() + file.originalname);
     }
   })
@@ -86,7 +86,7 @@ router.post(
     const flowers = await Flowers.findOne({ id: flowerid });
     const image = `https://s3.ap-northeast-2.amazonaws.com/${req.file.bucket}/${
       req.file.key
-    }`;
+      }`;
     const input = {
       image: image,
       content: req.body.content
@@ -104,44 +104,4 @@ router.post(
   }
 );
 
-// router.get("/:id", async (req, res) => {
-//   const flowers = await Flowers.findOne(
-//     { id: req.params.id },
-//     { relations: ["flowerType"] }
-//   );
-//   if (flowers) {
-//     console.log(flowers);
-//     // res.status(200).json({ flowers: flowers });
-//   } else {
-//     res.status(404).json("not found");
-//   }
-// });
-
-// router.put("/:id", upload.single("file"), async (req, res) => {
-//   const flowers = await Flowers.findOne({ id: req.params.id });
-//   const flower_type = await FlowerType.findOne({ name: req.body.type });
-//   const image = `https://s3.ap-northeast-2.amazonaws.com/${req.file.bucket}/${
-//     req.file.key
-//   }`;
-//   if (flowers) {
-//     flowers.content = req.body.content;
-//     flowers.image = req.body.image;
-//     (flowers.name = req.body.name), (flowers.weather = req.body.weather);
-//     flowers.flowerType = flower_type;
-//     flowers.save();
-//     res.status(200).json({ succes: true, message: "Edit Flower" });
-//   } else {
-//     res.status(404).json({ success: false, message: "Not Edit Flower" });
-//   }
-// });
-
-// router.get("/flower/:typeid", async (req, res) => {
-//   const flowerType = await FlowerType.findOne({ id: req.params.typeid });
-//   const flowers = await Flowers.find({ flowerType: flowerType });
-//   if (flowers) {
-//     res.send(flowers);
-//   } else {
-//     res.status(404).json({ sucess: false });
-//   }
-// });
 module.exports = router;
