@@ -14,7 +14,7 @@
     "@types/multer-s3": "^2.7.6",
     "apollo-server": "^2.4.8",
     "apollo-server-express": "^2.4.8",
-    "aws-sdk": "^2.437.0",
+    "aws-sdk": "^2.814.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "graphql": "^14.1.1",
